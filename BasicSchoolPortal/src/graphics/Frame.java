@@ -5,11 +5,19 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+/**
+ * 
+ * @author Daniel Santillan
+ */
 public class Frame extends JFrame {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
 	
 	
+	/**
+	 * 
+	 */
 	public Frame() {
 		setTitle("Basic School Portal");
 		Dimension x = Toolkit.getDefaultToolkit().getScreenSize();
@@ -22,6 +30,7 @@ public class Frame extends JFrame {
 		setResizable(true);	
 		setFocusable(true);
 		
+		add(new Panel1Introduction());
 	}
 	
 }
