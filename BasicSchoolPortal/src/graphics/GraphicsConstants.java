@@ -1,6 +1,8 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
 /**
  * The GraphicsConstants class stores frequently used fields among classes of
@@ -16,5 +18,8 @@ public class GraphicsConstants {
 	
 	public static final Color headerColor = new Color(0, 179, 255);
 	public static final Color centerColor = new Color(209, 241, 255);
+	public static final Font montserratBold50 = new Font("Montserrat", Font.BOLD, 50);
+	public static final Font montserratBold30 = new Font("Montserrat", Font.BOLD, 30);
+	public static final Dimension textFieldDimension = new Dimension(500, 75);
 
 }

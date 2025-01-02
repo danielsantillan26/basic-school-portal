@@ -17,6 +17,8 @@ public class Panel2Login extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+	private JPanel centerPanel;
+	private SpringLayout sl;
 	private JLabel visiblePassword;
 	
 	
@@ -41,48 +43,40 @@ public class Panel2Login extends JPanel {
 	
 	
 	private void createCenterPanel() {
-		SpringLayout sl = new SpringLayout();
-		JPanel centerPanel = new JPanel(sl);
+		sl = new SpringLayout();
+		centerPanel = new JPanel(sl);
 		centerPanel.setBackground(GraphicsConstants.centerColor);
 		
-		Font montserratBold50 = new Font("Montserrat", Font.BOLD, 50);
-		Font montserratBold40 = new Font("Montserrat", Font.BOLD, 40);
-		Font montserratBold30 = new Font("Montserrat", Font.BOLD, 30);
-		Dimension textFieldDimension = new Dimension(500, 75);
-		
 		JLabel enterUsername = new JLabel("Enter username:");
-		enterUsername.setFont(montserratBold50);
+		enterUsername.setFont(GraphicsConstants.montserratBold50);
 		
 		JTextField givenUsername = new JTextField();
-		givenUsername.setMinimumSize(textFieldDimension);
-		givenUsername.setPreferredSize(textFieldDimension);
-		givenUsername.setFont(montserratBold40);
+		givenUsername.setMinimumSize(GraphicsConstants.textFieldDimension);
+		givenUsername.setPreferredSize(GraphicsConstants.textFieldDimension);
+		givenUsername.setFont(GraphicsConstants.montserratBold30);
 		
 		JLabel enterPassword = new JLabel("Enter Password:");
-		enterPassword.setFont(montserratBold50);
+		enterPassword.setFont(GraphicsConstants.montserratBold50);
 		
 		JPasswordField givenPassword = new JPasswordField();
-		givenPassword.setMinimumSize(textFieldDimension);
-		givenPassword.setPreferredSize(textFieldDimension);
-		givenPassword.setFont(montserratBold40);
+		givenPassword.setMinimumSize(GraphicsConstants.textFieldDimension);
+		givenPassword.setPreferredSize(GraphicsConstants.textFieldDimension);
+		givenPassword.setFont(GraphicsConstants.montserratBold30);
 		
 		visiblePassword = new JLabel();
-		visiblePassword.setFont(montserratBold30);
+		visiblePassword.setFont(GraphicsConstants.montserratBold30);
 		
 		JButton enterInformation = new JButton("Login");
 		enterInformation.setPreferredSize(new Dimension(200, 45));
-		enterInformation.setFont(montserratBold30);
+		enterInformation.setFont(GraphicsConstants.montserratBold30);
 		
 		JButton showHidePassword = new JButton("Show/Hide Password");
 		showHidePassword.setPreferredSize(new Dimension(500, 45));
-		showHidePassword.setFont(montserratBold30);
+		showHidePassword.setFont(GraphicsConstants.montserratBold30);
 		
 		JLabel failed = new JLabel();
-		failed.setFont(montserratBold40);
+		failed.setFont(GraphicsConstants.montserratBold30);
 		failed.setForeground(Color.RED);
-		
-		
-		
 		
 		centerPanel.add(enterUsername);
 		centerPanel.add(givenUsername);
@@ -103,9 +97,9 @@ public class Panel2Login extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, givenPassword, 300, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, visiblePassword, 100, SpringLayout.EAST, enterPassword);
 		sl.putConstraint(SpringLayout.NORTH, visiblePassword, 225, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, enterInformation, 200, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, enterInformation, 150, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, enterInformation, 500, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, showHidePassword, 450, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, showHidePassword, 400, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, showHidePassword, 500, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, failed, 150, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, failed, 420, SpringLayout.NORTH, centerPanel);
@@ -113,6 +107,13 @@ public class Panel2Login extends JPanel {
 		add(centerPanel, BorderLayout.CENTER);
 		
 		
+	}
+	
+	
+	public void addChangePageButtons(JButton goHome) {
+		centerPanel.add(goHome);
+		sl.putConstraint(SpringLayout.NORTH, goHome, 500, SpringLayout.NORTH, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, goHome, 950, SpringLayout.WEST, centerPanel);
 	}
 	
 }

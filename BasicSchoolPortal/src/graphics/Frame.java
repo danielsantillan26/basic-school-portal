@@ -3,6 +3,7 @@ package graphics;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,8 +26,8 @@ public class Frame extends JFrame {
 	 * 	interchanging of pages
 	 */
 	private CardLayout cl;
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -41,32 +42,42 @@ public class Frame extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(true);	
 		setFocusable(true);
-	
+
 		cl = new CardLayout();
 		container = getContentPane();
 		container.setLayout(cl);
 		prepareCardLayout();
 	}
-	
-	
-	
+
+
+
 	private void prepareCardLayout() {
 		Panel1Introduction panelIntro = new Panel1Introduction();
 		Panel2Login panelLogin = new Panel2Login();
 		Panel3Register panelRegister = new Panel3Register();
-		
+
 		JButton buttonPanelIntroRegister = new JButton(new ImageIcon(getClass().getClassLoader().getResource("REGISTER.png")));
 		buttonPanelIntroRegister.setBorder(null);
 		buttonPanelIntroRegister.setOpaque(false);
 		buttonPanelIntroRegister.setContentAreaFilled(false);
 		buttonPanelIntroRegister.setBorderPainted(false);
-		
+
 		JButton buttonPanelIntroLogin = new JButton(new ImageIcon(getClass().getClassLoader().getResource("LOGIN.png")));
 		buttonPanelIntroLogin.setBorder(null);
 		buttonPanelIntroLogin.setOpaque(false);
 		buttonPanelIntroLogin.setContentAreaFilled(false);
 		buttonPanelIntroLogin.setBorderPainted(false);
 		
+		Dimension dimensionButtonReturn = new Dimension(220, 45);
+
+		JButton buttonPanelLoginReturn = new JButton("Return");
+		buttonPanelLoginReturn.setPreferredSize(dimensionButtonReturn);
+		buttonPanelLoginReturn.setFont(GraphicsConstants.montserratBold30);
+
+		JButton buttonPanelRegisterReturn = new JButton("Return");
+		buttonPanelRegisterReturn.setPreferredSize(dimensionButtonReturn);
+		buttonPanelRegisterReturn.setFont(GraphicsConstants.montserratBold30);
+
 		ActionListener al = new ActionListener() {
 
 			@Override
@@ -76,21 +87,28 @@ public class Frame extends JFrame {
 					cl.next(container);
 				} else if (e.getSource() == buttonPanelIntroLogin) {
 					cl.next(container);
+				} else if (e.getSource() == buttonPanelLoginReturn || 
+						e.getSource() == buttonPanelRegisterReturn) {
+					cl.first(container);
 				}
 			}
-			
-			
+
+
 		};
-		
+
 		buttonPanelIntroRegister.addActionListener(al);
 		buttonPanelIntroLogin.addActionListener(al);
-		
+		buttonPanelLoginReturn.addActionListener(al);
+		buttonPanelRegisterReturn.addActionListener(al);
+
 		panelIntro.addChangePageButtons(buttonPanelIntroRegister, buttonPanelIntroLogin);
+		panelLogin.addChangePageButtons(buttonPanelLoginReturn);
+		panelRegister.addChangePageButtons(buttonPanelRegisterReturn);
 		
 		container.add(panelIntro);
 		container.add(panelLogin);
 		container.add(panelRegister);
-		
+
 	}
-	
+
 }
