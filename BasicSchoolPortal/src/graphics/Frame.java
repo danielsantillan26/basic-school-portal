@@ -1,5 +1,7 @@
 package graphics;
 
+import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -13,6 +15,12 @@ public class Frame extends JFrame {
 
 	/** Version */
 	private static final long serialVersionUID = 1L;
+	/** Container for the card layout */
+	private Container container;
+	/** Card layout that holds all the JPanels together and allows for the
+	 * 	interchanging of pages
+	 */
+	private CardLayout cl;
 	
 	
 	/**
@@ -29,8 +37,23 @@ public class Frame extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(true);	
 		setFocusable(true);
+	
+		cl = new CardLayout();
+		container = getContentPane();
+		container.setLayout(cl);
+		prepareCardLayout();
+	}
+	
+	
+	
+	private void prepareCardLayout() {
+		Panel1Introduction panelIntro = new Panel1Introduction();
 		
-		add(new Panel1Introduction());
+		
+		
+		
+		container.add(panelIntro);	
+		
 	}
 	
 }

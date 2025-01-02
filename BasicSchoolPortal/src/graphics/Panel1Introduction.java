@@ -3,6 +3,8 @@ package graphics;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -27,7 +29,8 @@ public class Panel1Introduction extends JPanel {
 	
 	
 	/**
-	 * 
+	 * This constructor sets up the JPanel, adding the buttons and title
+	 * graphics.
 	 */
 	public Panel1Introduction() {
 		setLayout(new BorderLayout());
@@ -56,6 +59,8 @@ public class Panel1Introduction extends JPanel {
 	 */
 	private void createCenterPanel() {
 		centerPanel.setBackground(GraphicsConstants.centerColor);
+		JLabel intro = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("EDUPORTAL_INTRO_LOGO.png")));
+		centerPanel.add(intro);
 		
 	}
 	
