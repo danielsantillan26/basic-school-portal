@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,11 +23,6 @@ public class Panel1Introduction extends JPanel {
 	/** Version */
 	private static final long serialVersionUID = 1L;
 	
-	/** JPanel for the header of the page. */
-	private JPanel northPanel;
-	/** JPanel for the center portion of the page. */
-	private JPanel centerPanel;
-	
 	
 	/**
 	 * This constructor sets up the JPanel, adding the buttons and title
@@ -34,10 +30,6 @@ public class Panel1Introduction extends JPanel {
 	 */
 	public Panel1Introduction() {
 		setLayout(new BorderLayout());
-		northPanel = new JPanel();
-		centerPanel = new JPanel();
-		add(northPanel, BorderLayout.NORTH);
-		add(centerPanel, BorderLayout.CENTER);
 		
 		createNorthPanel();
 		createCenterPanel();
@@ -49,8 +41,10 @@ public class Panel1Introduction extends JPanel {
 	 * 
 	 */
 	private void createNorthPanel() {
+		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
 		northPanel.setPreferredSize(new Dimension(getWidth(), 75));
+		add(northPanel, BorderLayout.NORTH);
 	}
 	
 	
@@ -58,10 +52,21 @@ public class Panel1Introduction extends JPanel {
 	 * 
 	 */
 	private void createCenterPanel() {
+		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(GraphicsConstants.centerColor);
 		JLabel intro = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("EDUPORTAL_INTRO_LOGO.png")));
 		centerPanel.add(intro);
+		add(centerPanel, BorderLayout.CENTER);
 		
+	}
+	
+	
+	public void addChangePageButtons(JButton register, JButton login) {
+		JPanel southPanel = new JPanel();
+		southPanel.setBackground(GraphicsConstants.centerColor);
+		southPanel.add(register);
+		southPanel.add(login);
+		add(southPanel, BorderLayout.SOUTH);
 	}
 	
 }
