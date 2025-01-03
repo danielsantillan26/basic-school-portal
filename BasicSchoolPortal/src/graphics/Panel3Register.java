@@ -86,10 +86,6 @@ public class Panel3Register extends JPanel {
 		givenPassword.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setFont(GraphicsConstants.montserratBold30);
 		
-		JButton enterInformation = new JButton("Create Account");
-		enterInformation.setPreferredSize(new Dimension(300, 45));
-		enterInformation.setFont(GraphicsConstants.montserratBold30);
-		
 		JButton showHidePassword = new JButton("Show/Hide Password");
 		showHidePassword.setPreferredSize(new Dimension(500, 45));
 		showHidePassword.setFont(GraphicsConstants.montserratBold30);
@@ -110,7 +106,6 @@ public class Panel3Register extends JPanel {
 		centerPanel.add(givenPassword);
 		centerPanel.add(failed);
 		centerPanel.add(showHidePassword);
-		centerPanel.add(enterInformation);
 		
 		sl.putConstraint(SpringLayout.WEST, enterSchoolName, 100, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, enterSchoolName, 50, SpringLayout.NORTH, centerPanel);
@@ -134,9 +129,7 @@ public class Panel3Register extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, givenPassword, 450, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, failed, 100, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, failed, 500, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, enterInformation, 100, SpringLayout.WEST, centerPanel);
-		sl.putConstraint(SpringLayout.NORTH, enterInformation, 600, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, showHidePassword, 25, SpringLayout.EAST, enterInformation);
+		sl.putConstraint(SpringLayout.WEST, showHidePassword, 425, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, showHidePassword, 600, SpringLayout.NORTH,centerPanel);
 		
 		
@@ -144,8 +137,13 @@ public class Panel3Register extends JPanel {
 	}
 	
 	
-	public void addChangePageButtons(JButton goHome) {
+	public void addChangePageButtons(JButton create, JButton goHome) {
+		centerPanel.add(create);
 		centerPanel.add(goHome);
+
+		sl.putConstraint(SpringLayout.WEST, create, 100, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.NORTH, create, 600, SpringLayout.NORTH, centerPanel);
+		
 		sl.putConstraint(SpringLayout.NORTH, goHome, 600, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, goHome, 950, SpringLayout.WEST, centerPanel);
 	}
