@@ -57,7 +57,18 @@ public class Frame extends JFrame {
 		Panel3Register panelRegister = new Panel3Register();
 		Panel4CreateUsers panelCreateUsers = new Panel4CreateUsers();
 		Panel5StudentHomepage panelStudentHomepage = new Panel5StudentHomepage();
-		
+		Panel6StudentGrades panelStudentGrades = new Panel6StudentGrades();
+		Panel7StudentGradeSim panelStudentGradeSim = new Panel7StudentGradeSim();
+		Panel8StudentRosters panelStudentRosters = new Panel8StudentRosters();
+		Panel9TeacherHomepage panelTeacherHomepage = new Panel9TeacherHomepage();
+		Panel10TeacherGrader panelTeacherGrader = new Panel10TeacherGrader();
+		Panel11TeacherMessageEdits panelTeacherMessageEdits = new Panel11TeacherMessageEdits();
+		Panel12TeacherRosters panelTeacherRosters = new Panel12TeacherRosters();
+		Panel13AdminHomepage panelAdminHomepage = new Panel13AdminHomepage();
+		Panel14AdminClassCreation panelAdminClassCreation = new Panel14AdminClassCreation();
+		Panel15AdminTeacherAssignments panelAdminTeacherAssignments = new Panel15AdminTeacherAssignments();
+		Panel16AdminStudentAssignments panelAdminStudentAssignments = new Panel16AdminStudentAssignments();
+
 		JButton buttonPanelIntroRegister = new JButton(new ImageIcon(getClass().getClassLoader().getResource("REGISTER.png")));
 		buttonPanelIntroRegister.setBorder(null);
 		buttonPanelIntroRegister.setOpaque(false);
@@ -69,17 +80,17 @@ public class Frame extends JFrame {
 		buttonPanelIntroLogin.setOpaque(false);
 		buttonPanelIntroLogin.setContentAreaFilled(false);
 		buttonPanelIntroLogin.setBorderPainted(false);
-		
+
 		Dimension dimensionButtonReturn = new Dimension(220, 45);
 
 		JButton buttonPanelLoginLogin = new JButton("Login");
 		buttonPanelLoginLogin.setPreferredSize(new Dimension(200, 45));
 		buttonPanelLoginLogin.setFont(GraphicsConstants.montserratBold30);
-		
+
 		JButton buttonPanelLoginReturn = new JButton("Return");
 		buttonPanelLoginReturn.setPreferredSize(dimensionButtonReturn);
 		buttonPanelLoginReturn.setFont(GraphicsConstants.montserratBold30);
-		
+
 		JButton buttonPanelRegisterCreate = new JButton("Create Account");
 		buttonPanelRegisterCreate.setPreferredSize(new Dimension(300, 45));
 		buttonPanelRegisterCreate.setFont(GraphicsConstants.montserratBold30);
@@ -91,11 +102,24 @@ public class Frame extends JFrame {
 		JButton buttonPanelCreateUsersAdd = new JButton("Add User");
 		buttonPanelCreateUsersAdd.setPreferredSize(dimensionButtonReturn);
 		buttonPanelCreateUsersAdd.setFont(GraphicsConstants.montserratBold30);
-		
+
 		JButton buttonPanelCreateUsersReturn = new JButton("Admin Homepage");
 		buttonPanelCreateUsersReturn.setPreferredSize(new Dimension(320, 45));
 		buttonPanelCreateUsersReturn.setFont(GraphicsConstants.montserratBold30);
+
+		JButton buttonPanelStudentHomepageViewGrades = new JButton("View Grades");
+		buttonPanelStudentHomepageViewGrades.setFont(GraphicsConstants.montserratBold30);
+
+		JButton buttonPanelStudentHomepageGradingSim = new JButton("Grading Simulator");
+		buttonPanelStudentHomepageGradingSim.setFont(GraphicsConstants.montserratBold30);
+
+		JButton buttonPanelStudentHomepageViewClass = new JButton("View Rosters");
+		buttonPanelStudentHomepageViewClass.setFont(GraphicsConstants.montserratBold30);
 		
+		JButton buttonPanelStudentGradesReturn = new JButton("Return");
+		buttonPanelStudentGradesReturn.setPreferredSize(dimensionButtonReturn);
+		buttonPanelStudentGradesReturn.setFont(GraphicsConstants.montserratBold30);
+
 		ActionListener al = new ActionListener() {
 
 			@Override
@@ -113,25 +137,27 @@ public class Frame extends JFrame {
 				} else if (e.getSource() == buttonPanelLoginLogin) {
 					int test = 0;
 					if (test == 0) {
-						System.out.println("Hi Mrs. Kelly\n" +
-								"I usually hide easter eggs in my programs. However,\n"
-								+ "I decided to hide my easter egg in my GitHub history.\n" +
-								"I am sorry to you and myself that I procrastinated on this\n" +
-								"project, LOL. Anyway I'm going to eat lunch while I cram\n" +
-								"so I will update my GitHub. You can access this easter egg\n" +
-								"by clicking login on the login page and looking at console.\n");
 						cl.next(container);
 						cl.next(container);
 						cl.next(container);
 					} else if (test == 1) {
-						
+
 					} else if (test == 2) {
-						
+
 					}
+				} else if (e.getSource() == buttonPanelStudentHomepageViewGrades) {
+					cl.next(container);
+				} else if (e.getSource() == buttonPanelStudentHomepageGradingSim) {
+					cl.next(container);
+					cl.next(container);
+				} else if (e.getSource() == buttonPanelStudentHomepageViewClass) {
+					cl.next(container);
+					cl.next(container);
+					cl.next(container);
+				} else if (e.getSource() == buttonPanelStudentGradesReturn) {
+					cl.previous(container);
 				}
 			}
-
-
 		};
 
 		buttonPanelIntroRegister.addActionListener(al);
@@ -142,17 +168,36 @@ public class Frame extends JFrame {
 		buttonPanelRegisterReturn.addActionListener(al);
 		buttonPanelCreateUsersAdd.addActionListener(al);
 		buttonPanelCreateUsersReturn.addActionListener(al);
+		buttonPanelStudentHomepageViewGrades.addActionListener(al);
+		buttonPanelStudentHomepageGradingSim.addActionListener(al);
+		buttonPanelStudentHomepageViewClass.addActionListener(al);
+		buttonPanelStudentGradesReturn.addActionListener(al);
+
 
 		panelIntro.addChangePageButtons(buttonPanelIntroRegister, buttonPanelIntroLogin);
 		panelLogin.addChangePageButtons(buttonPanelLoginLogin, buttonPanelLoginReturn);
 		panelRegister.addChangePageButtons(buttonPanelRegisterCreate, buttonPanelRegisterReturn);
 		panelCreateUsers.addChangePageButtons(buttonPanelCreateUsersAdd, buttonPanelCreateUsersReturn);
+		panelStudentHomepage.addChangePageButtons(buttonPanelStudentHomepageViewGrades, buttonPanelStudentHomepageGradingSim, buttonPanelStudentHomepageViewClass);
+		panelStudentGrades.addChangePageButtons(buttonPanelStudentGradesReturn);
+		
 		
 		container.add(panelIntro);
 		container.add(panelLogin);
 		container.add(panelRegister);
 		container.add(panelCreateUsers);
 		container.add(panelStudentHomepage);
+		container.add(panelStudentGrades);
+		container.add(panelStudentGradeSim);
+		container.add(panelStudentRosters);
+		container.add(panelTeacherHomepage);
+		container.add(panelTeacherGrader);
+		container.add(panelTeacherMessageEdits);
+		container.add(panelTeacherRosters);
+		container.add(panelAdminHomepage);
+		container.add(panelAdminClassCreation);
+		container.add(panelAdminTeacherAssignments);
+		container.add(panelAdminStudentAssignments);
 
 	}
 
