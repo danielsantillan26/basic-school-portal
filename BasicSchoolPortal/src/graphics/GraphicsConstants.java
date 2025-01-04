@@ -20,6 +20,7 @@ public class GraphicsConstants {
 	public static final Color centerColor = new Color(209, 241, 255);
 	public static final Font montserratBold50 = new Font("Montserrat", Font.BOLD, 50);
 	public static final Font montserratBold30 = new Font("Montserrat", Font.BOLD, 30);
+	public static final Font montserratBold15 = new Font("Montserrat", Font.BOLD, 15);
 	public static final Dimension textFieldDimension = new Dimension(500, 75);
 
 }

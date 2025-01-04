@@ -119,6 +119,14 @@ public class Frame extends JFrame {
 		JButton buttonPanelStudentGradesReturn = new JButton("Return");
 		buttonPanelStudentGradesReturn.setPreferredSize(dimensionButtonReturn);
 		buttonPanelStudentGradesReturn.setFont(GraphicsConstants.montserratBold30);
+		
+		JButton buttonPanelStudentGradeSimReturn = new JButton("Return");
+		buttonPanelStudentGradeSimReturn.setPreferredSize(dimensionButtonReturn);
+		buttonPanelStudentGradeSimReturn.setFont(GraphicsConstants.montserratBold30);
+		
+		JButton buttonPanelStudentRostersReturn = new JButton("Return");
+		buttonPanelStudentRostersReturn.setPreferredSize(dimensionButtonReturn);
+		buttonPanelStudentRostersReturn.setFont(GraphicsConstants.montserratBold30);
 
 		ActionListener al = new ActionListener() {
 
@@ -135,12 +143,17 @@ public class Frame extends JFrame {
 				} else if (e.getSource() == buttonPanelRegisterCreate) {
 					cl.next(container);
 				} else if (e.getSource() == buttonPanelLoginLogin) {
-					int test = 0;
+					int test = 1;
 					if (test == 0) {
 						cl.next(container);
 						cl.next(container);
 						cl.next(container);
 					} else if (test == 1) {
+						int i = 0;
+						while (i < 7) {
+							cl.next(container);
+							i++;
+						}
 
 					} else if (test == 2) {
 
@@ -155,6 +168,13 @@ public class Frame extends JFrame {
 					cl.next(container);
 					cl.next(container);
 				} else if (e.getSource() == buttonPanelStudentGradesReturn) {
+					cl.previous(container);
+				} else if (e.getSource() == buttonPanelStudentGradeSimReturn) {
+					cl.previous(container);
+					cl.previous(container);
+				} else if (e.getSource() == buttonPanelStudentRostersReturn) {
+					cl.previous(container);
+					cl.previous(container);
 					cl.previous(container);
 				}
 			}
@@ -172,6 +192,8 @@ public class Frame extends JFrame {
 		buttonPanelStudentHomepageGradingSim.addActionListener(al);
 		buttonPanelStudentHomepageViewClass.addActionListener(al);
 		buttonPanelStudentGradesReturn.addActionListener(al);
+		buttonPanelStudentGradeSimReturn.addActionListener(al);
+		buttonPanelStudentRostersReturn.addActionListener(al);
 
 
 		panelIntro.addChangePageButtons(buttonPanelIntroRegister, buttonPanelIntroLogin);
@@ -180,6 +202,8 @@ public class Frame extends JFrame {
 		panelCreateUsers.addChangePageButtons(buttonPanelCreateUsersAdd, buttonPanelCreateUsersReturn);
 		panelStudentHomepage.addChangePageButtons(buttonPanelStudentHomepageViewGrades, buttonPanelStudentHomepageGradingSim, buttonPanelStudentHomepageViewClass);
 		panelStudentGrades.addChangePageButtons(buttonPanelStudentGradesReturn);
+		panelStudentGradeSim.addChangePageButtons(buttonPanelStudentGradeSimReturn);
+		panelStudentRosters.addChangePageButtons(buttonPanelStudentRostersReturn);
 		
 		
 		container.add(panelIntro);

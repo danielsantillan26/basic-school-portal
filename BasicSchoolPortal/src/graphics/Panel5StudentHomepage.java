@@ -57,12 +57,12 @@ public class Panel5StudentHomepage extends JPanel {
 		centerPanel.add(gradingSim);
 		centerPanel.add(viewClassmates);
 		
-		sl.putConstraint(SpringLayout.WEST, viewGrades, 100, SpringLayout.WEST, centerPanel);
-		sl.putConstraint(SpringLayout.NORTH, viewGrades, 600, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, gradingSim, 375, SpringLayout.WEST, centerPanel);
-		sl.putConstraint(SpringLayout.NORTH, gradingSim, 600, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, viewClassmates, 775, SpringLayout.WEST, centerPanel);
-		sl.putConstraint(SpringLayout.NORTH, viewClassmates, 600, SpringLayout.NORTH, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, viewGrades, 150, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.NORTH, viewGrades, 550, SpringLayout.NORTH, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, gradingSim, 425, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.NORTH, gradingSim, 550, SpringLayout.NORTH, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, viewClassmates, 825, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.NORTH, viewClassmates, 550, SpringLayout.NORTH, centerPanel);
 	}
 
 }
