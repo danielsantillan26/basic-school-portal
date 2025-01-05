@@ -50,7 +50,7 @@ public class Panel8StudentRosters extends JPanel {
 		JComboBox<String> givenClass = new JComboBox<String>();
 		givenClass.setFont(GraphicsConstants.montserratBold30);
 		
-		JButton obtainRoster = new JButton("See Grade");
+		JButton obtainRoster = new JButton("See Roster");
 		obtainRoster.setFont(GraphicsConstants.montserratBold30);
 		
 		String[] columnNames = {"Student Name"};

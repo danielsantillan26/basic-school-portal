@@ -53,7 +53,16 @@ public class Panel9TeacherHomepage extends JPanel {
 	
 	
 	public void addChangePageButtons(JButton grader, JButton messageEdits, JButton rosters) {
+		centerPanel.add(grader);
+		centerPanel.add(messageEdits);
+		centerPanel.add(rosters);
 		
+		sl.putConstraint(SpringLayout.WEST, grader, 150, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.NORTH, grader, 550, SpringLayout.NORTH, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, messageEdits, 50, SpringLayout.EAST, grader);
+		sl.putConstraint(SpringLayout.NORTH, messageEdits, 550, SpringLayout.NORTH, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, rosters, 50, SpringLayout.EAST, messageEdits);
+		sl.putConstraint(SpringLayout.NORTH, rosters, 550, SpringLayout.NORTH, centerPanel);
 	}
 	
 }
