@@ -171,7 +171,20 @@ public class Frame extends JFrame {
 		buttonPanelAdminHomepageTeacherAssignments.setFont(GraphicsConstants.montserratBold30);
 
 		JButton buttonPanelAdminHomepageStudentAssignments = new JButton("Assign Students");
+		buttonPanelAdminHomepageStudentAssignments.setPreferredSize(new Dimension(400, 45));
 		buttonPanelAdminHomepageStudentAssignments.setFont(GraphicsConstants.montserratBold30);
+		
+		JButton buttonPanelAdminClassCreationReturn = new JButton("Return");
+		buttonPanelAdminHomepageStudentAssignments.setPreferredSize(dimensionButtonReturn);
+		buttonPanelAdminClassCreationReturn.setFont(GraphicsConstants.montserratBold30);
+		
+		JButton buttonPanelAdminTeacherAssignmentsReturn = new JButton("Return");
+		buttonPanelAdminTeacherAssignmentsReturn.setPreferredSize(dimensionButtonReturn);
+		buttonPanelAdminTeacherAssignmentsReturn.setFont(GraphicsConstants.montserratBold30);
+		
+		JButton buttonPanelAdminStudentAssignmentsReturn = new JButton("Return");
+		buttonPanelAdminStudentAssignmentsReturn.setPreferredSize(dimensionButtonReturn);
+		buttonPanelAdminStudentAssignmentsReturn.setFont(GraphicsConstants.montserratBold30);
 
 
 		ActionListener al = new ActionListener() {
@@ -267,8 +280,20 @@ public class Frame extends JFrame {
 					cl.next(container);
 				} else if (e.getSource() == buttonPanelAdminHomepageTeacherAssignments) {
 					cl.next(container);
+					cl.next(container);
 				} else if (e.getSource() == buttonPanelAdminHomepageStudentAssignments) {
 					cl.next(container);
+					cl.next(container);
+					cl.next(container);
+				} else if (e.getSource() == buttonPanelAdminClassCreationReturn) {
+					cl.previous(container);
+				} else if (e.getSource() == buttonPanelAdminTeacherAssignmentsReturn) {
+					cl.previous(container);
+					cl.previous(container);
+				} else if (e.getSource() == buttonPanelAdminStudentAssignmentsReturn) {
+					cl.previous(container);
+					cl.previous(container);
+					cl.previous(container);
 				}
 			}
 		};
@@ -300,6 +325,9 @@ public class Frame extends JFrame {
 		buttonPanelAdminHomepageClassCreation.addActionListener(al);
 		buttonPanelAdminHomepageTeacherAssignments.addActionListener(al);
 		buttonPanelAdminHomepageStudentAssignments.addActionListener(al);
+		buttonPanelAdminClassCreationReturn.addActionListener(al);
+		buttonPanelAdminTeacherAssignmentsReturn.addActionListener(al);
+		buttonPanelAdminStudentAssignmentsReturn.addActionListener(al);
 
 
 		panelIntro.addChangePageButtons(buttonPanelIntroRegister, buttonPanelIntroLogin);
@@ -316,7 +344,9 @@ public class Frame extends JFrame {
 		panelTeacherMessageEdits.addChangePageButtons(buttonPanelTeacherMessageEditsReturn);
 		panelTeacherRosters.addChangePageButtons(buttonPanelTeacherRosterReturn);
 		panelAdminHomepage.addChangePageButtons(buttonPanelAdminHomepageCreateUsers, buttonPanelAdminHomepageClassCreation, buttonPanelAdminHomepageTeacherAssignments, buttonPanelAdminHomepageStudentAssignments);
-		
+		panelAdminClassCreation.addChangePageButtons(buttonPanelAdminClassCreationReturn);
+		panelAdminTeacherAssignments.addChangePageButtons(buttonPanelAdminTeacherAssignmentsReturn);
+		panelAdminStudentAssignments.addChangePageButtons(buttonPanelAdminStudentAssignmentsReturn);
 		
 
 		container.add(panelIntro);
