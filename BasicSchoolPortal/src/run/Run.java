@@ -24,7 +24,6 @@ public class Run {
 		frame.setVisible(true);
 		
 		FileMaker.setup();
-		SchoolManager.setup();
 		
 		System.out.println(new Run());
 	}

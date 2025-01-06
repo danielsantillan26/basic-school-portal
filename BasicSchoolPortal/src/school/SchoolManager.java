@@ -10,8 +10,8 @@ import users.User;
 public class SchoolManager {
 
 	private static ArrayList<School> schools;
-
-	public static void setup() {
+	
+	public SchoolManager() {
 		schools = new ArrayList<School>();
 	}
 
@@ -31,46 +31,10 @@ public class SchoolManager {
 
 		return null;
 	}
-
-
-	public static User login(String username, String password) {
-		User proposedUser = searchUser(username);
-		
-		if (proposedUser == null) {
-			return null;
-		} else {
-			if (proposedUser.getPassword().equals(password)) {
-				return proposedUser;
-			} else {
-				return null;
-			}
-		}
-		
-	}
-
-
-	private static User searchUser(String username) {
-		for (School s : schools) {
-			for (Admin a : s.getAdmins()) {
-				if (a.getUsername() == username) {
-					return a;
-				}
-			}
-
-			for (Teacher t : s.getTeachers()) {
-				if (t.getUsername() == username) {
-					return t;
-				}
-			}
-
-			for (Student st : s.getStudents()) {
-				if (st.getUsername() == username) {
-					return st;
-				}
-			}
-		}
-
-		return null;
+	
+	
+	public static ArrayList<School> getSchools() {
+		return schools;
 	}
 
 }

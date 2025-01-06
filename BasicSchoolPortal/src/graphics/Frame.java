@@ -216,8 +216,9 @@ public class Frame extends JFrame {
 					
 					
 				} else if (e.getSource() == buttonPanelLoginLogin) {
+					panelLogin.resetFailed();
 					String[] information = panelLogin.obtainInformation();
-					User login = SchoolManager.login(information[0], information[1]);
+					User login = FileMaker.login(information[0], information[1]);
 					if (login != null) {
 						if (login.isAdmin()) {
 							for (int i = 0; i < 12; i++) {
@@ -232,6 +233,8 @@ public class Frame extends JFrame {
 							cl.next(container);
 							cl.next(container);
 						}
+					} else {
+						panelLogin.failed();
 					}
 					
 					

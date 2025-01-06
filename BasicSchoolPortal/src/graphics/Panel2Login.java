@@ -26,6 +26,7 @@ public class Panel2Login extends JPanel {
 	private JLabel visiblePassword;
 	private JTextField givenUsername;
 	private JPasswordField givenPassword;
+	private JLabel failed;
 
 
 	public Panel2Login() {
@@ -94,7 +95,7 @@ public class Panel2Login extends JPanel {
 
 		});
 
-		JLabel failed = new JLabel();
+		failed = new JLabel();
 		failed.setFont(GraphicsConstants.montserratBold30);
 		failed.setForeground(Color.RED);
 
@@ -106,13 +107,13 @@ public class Panel2Login extends JPanel {
 		centerPanel.add(showHidePassword);
 		centerPanel.add(failed);
 
-		sl.putConstraint(SpringLayout.WEST, enterUsername, 150, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, enterUsername, 100, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, enterUsername, 100, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, givenUsername, 100, SpringLayout.EAST, enterUsername);
+		sl.putConstraint(SpringLayout.WEST, givenUsername, 150, SpringLayout.EAST, enterUsername);
 		sl.putConstraint(SpringLayout.NORTH, givenUsername, 100, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, enterPassword, 150, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, enterPassword, 100, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, enterPassword, 300, SpringLayout.NORTH, centerPanel);
-		sl.putConstraint(SpringLayout.WEST, givenPassword, 100, SpringLayout.EAST, enterPassword);
+		sl.putConstraint(SpringLayout.WEST, givenPassword, 150, SpringLayout.EAST, enterPassword);
 		sl.putConstraint(SpringLayout.NORTH, givenPassword, 300, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, visiblePassword, 0, SpringLayout.WEST, givenPassword);
 		sl.putConstraint(SpringLayout.NORTH, visiblePassword, 400, SpringLayout.NORTH, centerPanel);
@@ -143,6 +144,16 @@ public class Panel2Login extends JPanel {
 		information[0] = givenUsername.getText();
 		information[1] = String.valueOf(givenPassword.getPassword());
 		return information;
+	}
+	
+	
+	public void failed() {
+		failed.setText("Username or password incorrect.");
+	}
+	
+	
+	public void resetFailed() {
+		failed.setText("");
 	}
 
 }
