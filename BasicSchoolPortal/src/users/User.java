@@ -1,20 +1,37 @@
-package teacher;
+package users;
 
-public class Teacher {
+import school.School;
 
+public class User {
+	
 	private String firstName;
 	private String lastName;
 	private String username;
 	private String password;
+	private School school;
 	
-	public Teacher(String firstName, String lastName, String username, String password) {
+	public User(String firstName, String lastName, String username, String password, School school) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
+		this.school = school;
 	}
-
 	
+	
+	public boolean isStudent() {
+		return false;
+	}
+	
+	public boolean isTeacher() {
+		return false;
+	}
+	
+	public boolean isAdmin() {
+		return false;
+	}
+	
+
 	
 	public String getFirstName() {
 		return firstName;
@@ -48,8 +65,13 @@ public class Teacher {
 		this.password = password;
 	}
 	
+	public School getSchool() {
+		return school;
+	}
 	
+	public void setSchool(School school) {
+		this.school = school;
+	}
 	
-	
-	
+
 }

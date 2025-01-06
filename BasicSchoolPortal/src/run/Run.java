@@ -1,6 +1,8 @@
 package run;
 
+import files.FileMaker;
 import graphics.Frame;
+import school.SchoolManager;
 
 /**
  * The Run class allows the Basic School Portal to run. The class creates the
@@ -20,6 +22,9 @@ public class Run {
 	public static void main(String[] args) {
 		Frame frame = new Frame();
 		frame.setVisible(true);
+		
+		FileMaker.setup();
+		SchoolManager.setup();
 		
 		System.out.println(new Run());
 	}

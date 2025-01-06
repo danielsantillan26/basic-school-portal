@@ -12,9 +12,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import files.FileMaker;
+import users.Admin;
+import users.User;
+
+
 /**
  * 
- * @author Daniel Santillan
+ * 
  */
 public class Frame extends JFrame {
 
@@ -26,6 +31,8 @@ public class Frame extends JFrame {
 	 * 	interchanging of pages
 	 */
 	private CardLayout cl;
+	
+	private User loggedInUser;
 
 
 	/**
@@ -199,9 +206,17 @@ public class Frame extends JFrame {
 				} else if (e.getSource() == buttonPanelLoginReturn || 
 						e.getSource() == buttonPanelRegisterReturn) {
 					cl.first(container);
+					
+					
+					
 				} else if (e.getSource() == buttonPanelRegisterCreate) {
+					String[] information = panelRegister.obtainInformation();
+					FileMaker.addSchool(information);
+					
 					cl.next(container);
-
+					
+					
+					
 					
 				} else if (e.getSource() == buttonPanelLoginLogin) {
 					int test = 0;
