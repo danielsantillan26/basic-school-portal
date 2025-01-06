@@ -24,6 +24,8 @@ public class Panel2Login extends JPanel {
 
 	private boolean isPasswordShown;
 	private JLabel visiblePassword;
+	private JTextField givenUsername;
+	private JPasswordField givenPassword;
 
 
 	public Panel2Login() {
@@ -54,7 +56,7 @@ public class Panel2Login extends JPanel {
 		JLabel enterUsername = new JLabel("Enter username:");
 		enterUsername.setFont(GraphicsConstants.montserratBold50);
 
-		JTextField givenUsername = new JTextField();
+		givenUsername = new JTextField();
 		givenUsername.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenUsername.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenUsername.setFont(GraphicsConstants.montserratBold30);
@@ -62,7 +64,7 @@ public class Panel2Login extends JPanel {
 		JLabel enterPassword = new JLabel("Enter Password:");
 		enterPassword.setFont(GraphicsConstants.montserratBold50);
 
-		JPasswordField givenPassword = new JPasswordField();
+		givenPassword = new JPasswordField();
 		givenPassword.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setFont(GraphicsConstants.montserratBold30);
@@ -133,6 +135,14 @@ public class Panel2Login extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, login, 500, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, goHome, 500, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, goHome, 950, SpringLayout.WEST, centerPanel);
+	}
+	
+	
+	public String[] obtainInformation() {
+		String[] information = new String[2];
+		information[0] = givenUsername.getText();
+		information[1] = String.valueOf(givenPassword.getPassword());
+		return information;
 	}
 
 }

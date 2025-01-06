@@ -9,6 +9,7 @@ public class User {
 	private String username;
 	private String password;
 	private School school;
+	private int id;
 	
 	public User(String firstName, String lastName, String username, String password, School school) {
 		this.firstName = firstName;
@@ -16,6 +17,16 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.school = school;
+		id = (int)(Math.random()*1000000);
+	}
+	
+	public User(String firstName, String lastName, String username, String password, School school, int  id) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.school = school;
+		this.id = id;
 	}
 	
 	
@@ -71,6 +82,10 @@ public class User {
 	
 	public void setSchool(School school) {
 		this.school = school;
+	}
+	
+	public int getID() {
+		return id;
 	}
 	
 

@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import files.FileMaker;
+import school.SchoolManager;
 import users.Admin;
 import users.User;
 
@@ -106,10 +107,6 @@ public class Frame extends JFrame {
 		JButton buttonPanelRegisterReturn = new JButton("Return");
 		buttonPanelRegisterReturn.setPreferredSize(dimensionButtonReturn);
 		buttonPanelRegisterReturn.setFont(GraphicsConstants.montserratBold30);
-
-		JButton buttonPanelCreateUsersAdd = new JButton("Add User");
-		buttonPanelCreateUsersAdd.setPreferredSize(dimensionButtonReturn);
-		buttonPanelCreateUsersAdd.setFont(GraphicsConstants.montserratBold30);
 
 		JButton buttonPanelCreateUsersReturn = new JButton("Admin Homepage");
 		buttonPanelCreateUsersReturn.setPreferredSize(new Dimension(320, 45));
@@ -219,25 +216,26 @@ public class Frame extends JFrame {
 					
 					
 				} else if (e.getSource() == buttonPanelLoginLogin) {
-					int test = 0;
-					if (test == 0) {
-						cl.next(container);
-						cl.next(container);
-						cl.next(container);
-					} else if (test == 1) {
-						int i = 0;
-						while (i < 7) {
+					String[] information = panelLogin.obtainInformation();
+					User login = SchoolManager.login(information[0], information[1]);
+					if (login != null) {
+						if (login.isAdmin()) {
+							for (int i = 0; i < 12; i++) {
+								cl.next(container);
+							}
+						} else if (login.isTeacher()) {
+							for (int i = 0; i < 7; i++) {
+								cl.next(container);
+							}
+						} else if (login.isStudent()) {
 							cl.next(container);
-							i++;
-						}
-
-					} else if (test == 2) {
-						int i = 0;
-						while (i < 12) {
 							cl.next(container);
-							i++;
+							cl.next(container);
 						}
 					}
+					
+					
+					
 				} else if (e.getSource() == buttonPanelStudentHomepageViewGrades) {
 					cl.next(container);
 				} else if (e.getSource() == buttonPanelStudentHomepageGradingSim) {
@@ -321,7 +319,6 @@ public class Frame extends JFrame {
 		buttonPanelLoginReturn.addActionListener(al);
 		buttonPanelRegisterCreate.addActionListener(al);
 		buttonPanelRegisterReturn.addActionListener(al);
-		buttonPanelCreateUsersAdd.addActionListener(al);
 		buttonPanelCreateUsersReturn.addActionListener(al);
 		buttonPanelStudentHomepageViewGrades.addActionListener(al);
 		buttonPanelStudentHomepageGradingSim.addActionListener(al);
@@ -350,7 +347,7 @@ public class Frame extends JFrame {
 		panelIntro.addChangePageButtons(buttonPanelIntroRegister, buttonPanelIntroLogin);
 		panelLogin.addChangePageButtons(buttonPanelLoginLogin, buttonPanelLoginReturn);
 		panelRegister.addChangePageButtons(buttonPanelRegisterCreate, buttonPanelRegisterReturn);
-		panelCreateUsers.addChangePageButtons(buttonPanelCreateUsersAdd, buttonPanelCreateUsersReturn);
+		panelCreateUsers.addChangePageButtons(buttonPanelCreateUsersReturn);
 		panelStudentHomepage.addChangePageButtons(buttonPanelStudentHomepageViewGrades, buttonPanelStudentHomepageGradingSim, buttonPanelStudentHomepageViewClass);
 		panelStudentGrades.addChangePageButtons(buttonPanelStudentGradesReturn);
 		panelStudentGradeSim.addChangePageButtons(buttonPanelStudentGradeSimReturn);

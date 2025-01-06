@@ -13,6 +13,10 @@ public class Teacher extends User {
 		super(firstName, lastName, username, password, school);
 	}
 	
+	public Teacher(String firstName, String lastName, String username, String password, School school, int id) {
+		super(firstName, lastName, username, password, school, id);
+	}
+	
 	
 	
 	@Override

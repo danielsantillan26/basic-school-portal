@@ -13,6 +13,10 @@ public class Student extends User {
 		super(firstName, lastName, username, password, school);
 	}
 	
+	public Student(String firstName, String lastName, String username, String password, School school, int id) {
+		super(firstName, lastName, username, password, school, id);
+	}
+	
 	
 	
 	@Override

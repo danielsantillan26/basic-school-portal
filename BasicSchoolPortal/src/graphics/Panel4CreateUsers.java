@@ -15,6 +15,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import files.FileMaker;
+
 public class Panel4CreateUsers extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +26,12 @@ public class Panel4CreateUsers extends JPanel {
 	
 	private boolean isPasswordShown;
 	private JLabel visiblePassword;
+	
+	private JComboBox<String> givenAccountType;
+	private JTextField givenUsername;
+	private JTextField givenFirstName;
+	private JTextField givenLastName;
+	private JPasswordField givenPassword;
 	
 	
 	public Panel4CreateUsers() {
@@ -53,7 +61,7 @@ public class Panel4CreateUsers extends JPanel {
 		JLabel enterAccountType = new JLabel("Enter Account Type:");
 		enterAccountType.setFont(GraphicsConstants.montserratBold50);
 		
-		JComboBox<String> givenAccountType = new JComboBox<String>();
+		givenAccountType = new JComboBox<String>();
 		givenAccountType.addItem("Student");
 		givenAccountType.addItem("Teacher");
 		givenAccountType.addItem("Administrator");
@@ -62,7 +70,7 @@ public class Panel4CreateUsers extends JPanel {
 		JLabel enterUsername = new JLabel("Enter Username:");
 		enterUsername.setFont(GraphicsConstants.montserratBold50);
 		
-		JTextField givenUsername = new JTextField();
+		givenUsername = new JTextField();
 		givenUsername.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenUsername.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenUsername.setFont(GraphicsConstants.montserratBold30);
@@ -70,7 +78,7 @@ public class Panel4CreateUsers extends JPanel {
 		JLabel enterFirstName = new JLabel("Enter First Name:");
 		enterFirstName.setFont(GraphicsConstants.montserratBold50);
 		
-		JTextField givenFirstName = new JTextField();
+		givenFirstName = new JTextField();
 		givenFirstName.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenFirstName.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenFirstName.setFont(GraphicsConstants.montserratBold30);
@@ -78,7 +86,7 @@ public class Panel4CreateUsers extends JPanel {
 		JLabel enterLastName = new JLabel("Enter Last Name:");
 		enterLastName.setFont(GraphicsConstants.montserratBold50);
 		
-		JTextField givenLastName = new JTextField();
+		givenLastName = new JTextField();
 		givenLastName.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenLastName.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenLastName.setFont(GraphicsConstants.montserratBold30);
@@ -86,7 +94,7 @@ public class Panel4CreateUsers extends JPanel {
 		JLabel enterPassword = new JLabel("Enter Password:");
 		enterPassword.setFont(GraphicsConstants.montserratBold50);
 		
-		JPasswordField givenPassword = new JPasswordField();
+		givenPassword = new JPasswordField();
 		givenPassword.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setFont(GraphicsConstants.montserratBold30);
@@ -120,6 +128,35 @@ public class Panel4CreateUsers extends JPanel {
 		failed.setFont(GraphicsConstants.montserratBold30);
 		failed.setForeground(Color.RED);
 		
+		JButton create = new JButton("Add User");
+		create.setFont(GraphicsConstants.montserratBold30);
+		create.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] information = new String[4];
+				information[0] = givenUsername.getText();
+				information[1] = givenFirstName.getText();
+				information[2] = givenLastName.getText();
+				information[3] = String.valueOf(givenPassword.getPassword());
+				
+				if (givenAccountType.getSelectedItem().equals("Student")) {
+					FileMaker.addStudent(information);
+				} else if (givenAccountType.getSelectedItem().equals("Teacher")) {
+					FileMaker.addTeacher(information);
+				} else if (givenAccountType.getSelectedItem().equals("Administrator")) {
+					FileMaker.addAdmin(information);
+				}
+				
+				givenUsername.setText("");
+				givenFirstName.setText("");
+				givenLastName.setText("");
+				givenPassword.setText("");
+				
+			}
+			
+		});
+		
 		centerPanel.add(enterAccountType);
 		centerPanel.add(givenAccountType);
 		centerPanel.add(enterUsername);
@@ -133,6 +170,7 @@ public class Panel4CreateUsers extends JPanel {
 		centerPanel.add(failed);
 		centerPanel.add(showHidePassword);
 		centerPanel.add(visiblePassword);
+		centerPanel.add(create);
 		
 		sl.putConstraint(SpringLayout.WEST, enterAccountType, 100, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, enterAccountType, 50, SpringLayout.NORTH, centerPanel);
@@ -160,19 +198,17 @@ public class Panel4CreateUsers extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, showHidePassword, 600, SpringLayout.NORTH,centerPanel);
 		sl.putConstraint(SpringLayout.WEST, visiblePassword, 0, SpringLayout.WEST, givenPassword);
 		sl.putConstraint(SpringLayout.NORTH, visiblePassword, 550, SpringLayout.NORTH, centerPanel);
+		sl.putConstraint(SpringLayout.WEST, create, 100, SpringLayout.WEST, centerPanel);
+		sl.putConstraint(SpringLayout.NORTH, create, 600, SpringLayout.NORTH, centerPanel);
 		
 		
 		add(centerPanel, BorderLayout.CENTER);
 	}
 	
 	
-	public void addChangePageButtons(JButton create, JButton goHome) {
-		centerPanel.add(create);
+	public void addChangePageButtons(JButton goHome) {
 		centerPanel.add(goHome);
-
-		sl.putConstraint(SpringLayout.WEST, create, 100, SpringLayout.WEST, centerPanel);
-		sl.putConstraint(SpringLayout.NORTH, create, 600, SpringLayout.NORTH, centerPanel);
-		
+	
 		sl.putConstraint(SpringLayout.NORTH, goHome, 600, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, goHome, 835, SpringLayout.WEST, centerPanel);
 	}
