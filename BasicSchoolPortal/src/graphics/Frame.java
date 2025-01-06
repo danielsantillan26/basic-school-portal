@@ -201,8 +201,10 @@ public class Frame extends JFrame {
 					cl.first(container);
 				} else if (e.getSource() == buttonPanelRegisterCreate) {
 					cl.next(container);
+
+					
 				} else if (e.getSource() == buttonPanelLoginLogin) {
-					int test = 2;
+					int test = 0;
 					if (test == 0) {
 						cl.next(container);
 						cl.next(container);

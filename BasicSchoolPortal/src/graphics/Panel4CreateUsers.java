@@ -3,6 +3,8 @@ package graphics;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +21,9 @@ public class Panel4CreateUsers extends JPanel {
 	
 	private JPanel centerPanel;
 	private SpringLayout sl;
+	
+	private boolean isPasswordShown;
+	private JLabel visiblePassword;
 	
 	
 	public Panel4CreateUsers() {
@@ -86,9 +91,30 @@ public class Panel4CreateUsers extends JPanel {
 		givenPassword.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setFont(GraphicsConstants.montserratBold30);
 		
+		visiblePassword = new JLabel("");
+		visiblePassword.setFont(GraphicsConstants.montserratBold15);
+		
 		JButton showHidePassword = new JButton("Show/Hide Password");
 		showHidePassword.setPreferredSize(new Dimension(500, 45));
 		showHidePassword.setFont(GraphicsConstants.montserratBold30);
+		isPasswordShown = false;
+		showHidePassword.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String textVisiblePassword = String.valueOf(givenPassword.getPassword());
+
+				if (isPasswordShown) {
+					visiblePassword.setText("");
+					isPasswordShown = false;
+				} else {
+					visiblePassword.setText(textVisiblePassword);
+					isPasswordShown = true;
+				}
+
+			}
+
+		});
 		
 		JLabel failed = new JLabel();
 		failed.setFont(GraphicsConstants.montserratBold30);
@@ -106,6 +132,7 @@ public class Panel4CreateUsers extends JPanel {
 		centerPanel.add(givenPassword);
 		centerPanel.add(failed);
 		centerPanel.add(showHidePassword);
+		centerPanel.add(visiblePassword);
 		
 		sl.putConstraint(SpringLayout.WEST, enterAccountType, 100, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, enterAccountType, 50, SpringLayout.NORTH, centerPanel);
@@ -131,6 +158,8 @@ public class Panel4CreateUsers extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, failed, 500, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, showHidePassword, 325, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, showHidePassword, 600, SpringLayout.NORTH,centerPanel);
+		sl.putConstraint(SpringLayout.WEST, visiblePassword, 0, SpringLayout.WEST, givenPassword);
+		sl.putConstraint(SpringLayout.NORTH, visiblePassword, 550, SpringLayout.NORTH, centerPanel);
 		
 		
 		add(centerPanel, BorderLayout.CENTER);

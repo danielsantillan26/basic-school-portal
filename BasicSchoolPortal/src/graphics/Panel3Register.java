@@ -3,6 +3,8 @@ package graphics;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,7 +20,15 @@ public class Panel3Register extends JPanel {
 	
 	private JPanel centerPanel;
 	private SpringLayout sl;
+	
 	private JLabel visiblePassword;
+	private boolean isPasswordShown;
+	
+	private JTextField givenSchoolName;
+	private JTextField givenUsername;
+	private JTextField givenFirstName;
+	private JTextField givenLastName;
+	private JPasswordField givenPassword;
 	
 	
 	public Panel3Register() {
@@ -49,7 +59,7 @@ public class Panel3Register extends JPanel {
 		JLabel enterSchoolName = new JLabel("Enter School Name:");
 		enterSchoolName.setFont(GraphicsConstants.montserratBold50);
 		
-		JTextField givenSchoolName = new JTextField();
+		givenSchoolName = new JTextField();
 		givenSchoolName.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenSchoolName.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenSchoolName.setFont(GraphicsConstants.montserratBold30);
@@ -57,7 +67,7 @@ public class Panel3Register extends JPanel {
 		JLabel enterUsername = new JLabel("Enter Username:");
 		enterUsername.setFont(GraphicsConstants.montserratBold50);
 		
-		JTextField givenUsername = new JTextField();
+		givenUsername = new JTextField();
 		givenUsername.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenUsername.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenUsername.setFont(GraphicsConstants.montserratBold30);
@@ -65,7 +75,7 @@ public class Panel3Register extends JPanel {
 		JLabel enterFirstName = new JLabel("Enter First Name:");
 		enterFirstName.setFont(GraphicsConstants.montserratBold50);
 		
-		JTextField givenFirstName = new JTextField();
+		givenFirstName = new JTextField();
 		givenFirstName.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenFirstName.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenFirstName.setFont(GraphicsConstants.montserratBold30);
@@ -73,7 +83,7 @@ public class Panel3Register extends JPanel {
 		JLabel enterLastName = new JLabel("Enter Last Name:");
 		enterLastName.setFont(GraphicsConstants.montserratBold50);
 		
-		JTextField givenLastName = new JTextField();
+		givenLastName = new JTextField();
 		givenLastName.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenLastName.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenLastName.setFont(GraphicsConstants.montserratBold30);
@@ -81,14 +91,35 @@ public class Panel3Register extends JPanel {
 		JLabel enterPassword = new JLabel("Enter Password:");
 		enterPassword.setFont(GraphicsConstants.montserratBold50);
 		
-		JPasswordField givenPassword = new JPasswordField();
+		givenPassword = new JPasswordField();
 		givenPassword.setMinimumSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setPreferredSize(GraphicsConstants.textFieldDimension);
 		givenPassword.setFont(GraphicsConstants.montserratBold30);
 		
+		visiblePassword = new JLabel();
+		visiblePassword.setFont(GraphicsConstants.montserratBold15);
+		
 		JButton showHidePassword = new JButton("Show/Hide Password");
 		showHidePassword.setPreferredSize(new Dimension(500, 45));
 		showHidePassword.setFont(GraphicsConstants.montserratBold30);
+		isPasswordShown = false;
+		showHidePassword.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String textVisiblePassword = String.valueOf(givenPassword.getPassword());
+				
+				if (isPasswordShown) {
+					visiblePassword.setText("");
+					isPasswordShown = false;
+				} else {
+					visiblePassword.setText(textVisiblePassword);
+					isPasswordShown = true;
+				}
+				
+			}
+		
+		});
 		
 		JLabel failed = new JLabel();
 		failed.setFont(GraphicsConstants.montserratBold30);
@@ -106,6 +137,7 @@ public class Panel3Register extends JPanel {
 		centerPanel.add(givenPassword);
 		centerPanel.add(failed);
 		centerPanel.add(showHidePassword);
+		centerPanel.add(visiblePassword);
 		
 		sl.putConstraint(SpringLayout.WEST, enterSchoolName, 100, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, enterSchoolName, 50, SpringLayout.NORTH, centerPanel);
@@ -131,6 +163,8 @@ public class Panel3Register extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, failed, 500, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, showHidePassword, 425, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, showHidePassword, 600, SpringLayout.NORTH,centerPanel);
+		sl.putConstraint(SpringLayout.WEST, visiblePassword, 0, SpringLayout.WEST, givenPassword);
+		sl.putConstraint(SpringLayout.NORTH, visiblePassword, 550, SpringLayout.NORTH, centerPanel);
 		
 		
 		add(centerPanel, BorderLayout.CENTER);
@@ -146,6 +180,18 @@ public class Panel3Register extends JPanel {
 		
 		sl.putConstraint(SpringLayout.NORTH, goHome, 600, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, goHome, 950, SpringLayout.WEST, centerPanel);
+	}
+	
+	
+	public String[] obtainInformation() {
+		String[] information = new String[5];
+		information[0] = givenSchoolName.getText();
+		information[1] = givenUsername.getText();
+		information[2] = givenFirstName.getText();
+		information[3] = givenLastName.getText();
+		information[4] = String.valueOf(givenPassword.getPassword());
+		return information;
+		
 	}
 	
 }
