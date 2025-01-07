@@ -26,6 +26,13 @@ public class Teacher extends User {
 	public boolean isTeacher() {
 		return true;
 	}
+
 	
-	
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Teacher []";
+	}
 }

@@ -77,5 +77,14 @@ public class Panel11TeacherMessageEdits extends JPanel {
 		sl.putConstraint(SpringLayout.WEST, goHome, 75, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, goHome, 550, SpringLayout.NORTH, centerPanel);
 	}
-	
+
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Panel11TeacherMessageEdits [centerPanel=" + centerPanel + ", sl=" + sl + "]";
+	}
+
 }

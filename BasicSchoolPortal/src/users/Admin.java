@@ -18,7 +18,14 @@ public class Admin extends User {
 	public boolean isAdmin() {
 		return true;
 	}
-	
 
+	
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Admin []";
+	}
 	
 }

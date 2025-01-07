@@ -59,5 +59,13 @@ public class Panel13AdminHomepage extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, studentAssignments, 450, SpringLayout.NORTH, centerPanel);
 		
 	}
-	
+
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Panel13AdminHomepage [centerPanel=" + centerPanel + ", sl=" + sl + "]";
+	}
 }

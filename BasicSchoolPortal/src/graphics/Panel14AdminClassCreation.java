@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import files.FileMaker;
+import files.FileManagement;
 
 public class Panel14AdminClassCreation extends JPanel {
 
@@ -60,7 +60,7 @@ public class Panel14AdminClassCreation extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String className = givenClassName.getText();
-				FileMaker.addClass(className);
+				FileManagement.addClass(className);
 				
 			}
 			
@@ -87,6 +87,14 @@ public class Panel14AdminClassCreation extends JPanel {
 		sl.putConstraint(SpringLayout.WEST, goHome, 300, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, goHome, 550, SpringLayout.NORTH, centerPanel);
 	}
-	
 
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Panel14AdminClassCreation [centerPanel=" + centerPanel + ", sl=" + sl + ", givenClassName="
+				+ givenClassName + "]";
+	}
 }

@@ -15,20 +15,40 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+/**
+ * The Panel2Login class constructs the second page of the project. This page
+ * encompasses the login portion of the program, allowing users to log in to
+ * existing accounts.
+ * 
+ * @author Daniel Santillan
+ * @version 1.0
+ */
 public class Panel2Login extends JPanel {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
 
+	/** The page center */
 	private JPanel centerPanel;
+	/** The page center layout */
 	private SpringLayout sl;
 
+	/** A boolean determining whether the password is shown or not */
 	private boolean isPasswordShown;
+	/** A JLabel with the password if needed */
 	private JLabel visiblePassword;
+	/** A JTextField holding the given username */
 	private JTextField givenUsername;
+	/** A JPasswordField holding the password */
 	private JPasswordField givenPassword;
+	/** A JLabel holding a message if the login fails */
 	private JLabel failed;
 
 
+	/**
+	 * Constructs the JPanel, adding the buttons and title
+	 * graphics.
+	 */
 	public Panel2Login() {
 		setLayout(new BorderLayout());
 		createNorthPanel();
@@ -36,7 +56,9 @@ public class Panel2Login extends JPanel {
 	}
 
 
-
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	private void createNorthPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
@@ -48,7 +70,11 @@ public class Panel2Login extends JPanel {
 		add(northPanel, BorderLayout.NORTH);
 	}
 
-
+	/**
+	 * Constructs the center portion of the panel. In this case, a prompt asking
+	 * for a username and password, along with text boxes for users to answer
+	 * the prompts, are added. Other buttons are added as well.
+	 */
 	private void createCenterPanel() {
 		sl = new SpringLayout();
 		centerPanel = new JPanel(sl);
@@ -79,6 +105,9 @@ public class Panel2Login extends JPanel {
 		isPasswordShown = false;
 		showHidePassword.addActionListener(new ActionListener() {
 
+			/**
+			 * Invoked when one asks to show or hide the password.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String textVisiblePassword = String.valueOf(givenPassword.getPassword());
@@ -128,6 +157,13 @@ public class Panel2Login extends JPanel {
 	}
 
 
+	/**
+	 * Adds buttons that change pages to the JPanel. These buttons were originally
+	 * created in the Frame class.
+	 * 
+	 * @param login	a button to log in
+	 * @param goHome a button to go back to the home page
+	 */
 	public void addChangePageButtons(JButton login, JButton goHome) {
 		centerPanel.add(login);
 		centerPanel.add(goHome);
@@ -137,23 +173,46 @@ public class Panel2Login extends JPanel {
 		sl.putConstraint(SpringLayout.NORTH, goHome, 500, SpringLayout.NORTH, centerPanel);
 		sl.putConstraint(SpringLayout.WEST, goHome, 950, SpringLayout.WEST, centerPanel);
 	}
-	
-	
+
+
+	/**
+	 * Returns the contents of the text fields containing the username and
+	 * password. To be used by the Frame class to send login information to the
+	 * FileManagement class once the login button is pressed.
+	 * 
+	 * @return a String array of size 2 with the username and password
+	 */
 	public String[] obtainInformation() {
 		String[] information = new String[2];
 		information[0] = givenUsername.getText();
 		information[1] = String.valueOf(givenPassword.getPassword());
 		return information;
 	}
-	
-	
+
+
+	/**
+	 * Sets a failed message if the login fails.
+	 */
 	public void failed() {
 		failed.setText("Username or password incorrect.");
 	}
-	
-	
+
+
+	/**
+	 * Resets the failed message if the login works.
+	 */
 	public void resetFailed() {
 		failed.setText("");
 	}
 
+
+	/**
+	 * This is the toString method for this class.
+	 */                                         
+	@Override
+	public String toString() {
+		return "Panel2Login [centerPanel=" + centerPanel + ", sl=" + sl + ", isPasswordShown=" + isPasswordShown
+				+ ", visiblePassword=" + visiblePassword + ", givenUsername=" + givenUsername + ", givenPassword="
+				+ givenPassword + ", failed=" + failed + "]";
+	}
 }

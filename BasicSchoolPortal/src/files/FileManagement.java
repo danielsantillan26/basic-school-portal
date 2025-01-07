@@ -18,29 +18,58 @@ import users.Student;
 import users.Teacher;
 import users.User;
 
-public class FileMaker {
+/**
+ * The FileManagement class contains a variety of procedures and functions that
+ * allow the program to be used over and over again without losing progress.
+ * The class can save users, reload users, and log in users. The class can also
+ * assign users to various classes.
+ * 
+ * @author Daniel Santillan
+ * @version 1.0
+ */
+public class FileManagement {
 
+	/** The name of the file that stores all of the data */
 	private static final String filename = "data.txt";
+	/** The file that stores all of the data */
 	private static File file;
 
+	/** A delimiter to denote a new school. */
 	private static final char DELIMITER_SCHOOL = '校';
+	/** A delimiter to denote a new set of administrators. */
 	private static final char DELIMITER_ADMIN = '头';
+	/** A delimiter to denote a new set of teachers. */
 	private static final char DELIMITER_TEACHER = '生';
+	/** A delimiter to denote a new set of students. */
 	private static final char DELIMITER_STUDENT = '师';
+	/** A delimiter to denote a new set of classes. */
 	private static final char DELIMITER_CLASS = '课';
+	/** A delimiter to denote the end of a school's entry on data. */
 	private static final char DELIMITER_END = '端';
+	/** A delimiter to denote the name of a class. */
 	private static final char DELIMITER_CLASS_CLASS = '大';
+	/** A delimiter to denote the start of a list of teachers for a class. */
 	private static final char DELIMITER_CLASS_TEACHER = '张';
+	/** A delimiter to denote the start of a list of students for a class. */
 	private static final char DELIMITER_CLASS_STUDENT = '伟';
+	/** A delimiter to denote the end of a class's entry on data. */
 	private static final char DELIMITER_CLASS_END = '习';
 
-	public static int currentSchoolID;
-	private static SchoolManager sm;
+	/** The ID of the school of the logged-in user or the school whose data
+	 * is currently being recorded */
+	private static int currentSchoolID;
+	/** The User who is currently loged in to the program. */
 	private static User loggedInUser;
 
+
+	/**
+	 * Prepares the program by setting up the file and reading in the current
+	 * data of the file to prepare Users and their affiliations for running of
+	 * the program.
+	 */
 	public static void setup() {
 		file = new File(filename);
-		sm = new SchoolManager();
+		SchoolManager.setup();
 
 		try {
 			file.createNewFile();
@@ -52,6 +81,13 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Adds a new school to the database, rewriting the file and inserting the
+	 * school's entry.
+	 * 
+	 * @param information	the information of the school (name, administrator
+	 * information)
+	 */
 	public static void addSchool(String[] information) {
 		try {
 			FileWriter writer = new FileWriter(file, true);
@@ -86,10 +122,17 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Adds a new admin to the current school's database, rewriting the file
+	 * and inserting the admin's entry. A unique user ID is also created.
+	 * 
+	 * @param information	the information of the admin (name, password, etc.)
+	 */
 	public static void addAdmin(String[] information) {
 		try {
 			ArrayList<String> contents = readFile();
 
+			// Determining where to write at
 			int schoolIndex = -1;
 			for (int i = 0; i < contents.size(); i++) {
 				if (contents.get(i).equals(Integer.toString(currentSchoolID))) {
@@ -105,7 +148,7 @@ public class FileMaker {
 				}
 			}
 
-
+			// Rewriting the file
 			FileWriter writer = new FileWriter(file, false);
 			BufferedWriter bWriter = new BufferedWriter(writer);
 
@@ -126,9 +169,7 @@ public class FileMaker {
 				bWriter.write(contents.get(i) + "\n");
 			}
 
-
 			bWriter.close();
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -136,6 +177,12 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Adds a new teacher to the current school's database, rewriting the file
+	 * and inserting the teacher's entry. A unique user ID is also created.
+	 * 
+	 * @param information the information of the teacher (name, password, etc.)
+	 */
 	public static void addTeacher(String[] information) {
 		try {
 			ArrayList<String> contents = readFile();
@@ -154,7 +201,6 @@ public class FileMaker {
 					break;
 				}
 			}
-
 
 			FileWriter writer = new FileWriter(file, false);
 			BufferedWriter bWriter = new BufferedWriter(writer);
@@ -176,17 +222,19 @@ public class FileMaker {
 				bWriter.write(contents.get(i) + "\n");
 			}
 
-
 			bWriter.close();
-
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 
-
+	/**
+	 * Adds a new student to the current school's database, rewriting the file
+	 * and inserting the student's entry. A unique user ID is also created.
+	 * 
+	 * @param information the information of the teacher (name, password, etc.)
+	 */
 	public static void addStudent(String[] information) {
 		try {
 			ArrayList<String> contents = readFile();
@@ -205,7 +253,6 @@ public class FileMaker {
 					break;
 				}
 			}
-
 
 			FileWriter writer = new FileWriter(file, false);
 			BufferedWriter bWriter = new BufferedWriter(writer);
@@ -229,13 +276,18 @@ public class FileMaker {
 
 			bWriter.close();
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 
+	/**
+	 * Adds a new class into the current school's database, rewriting the file
+	 * and inserting the class's entry.
+	 * 
+	 * @param className the name of the class
+	 */
 	public static void addClass(String className) {
 		try {
 			ArrayList<String> contents = readFile();
@@ -282,6 +334,15 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Attempts to log in a user based on a username and password. The user
+	 * is first identified before a password check is completed to ensure a 
+	 * secure log-in process.
+	 * 
+	 * @param username	the proposed username
+	 * @param password	the propsoed password
+	 * @return			the User to log in
+	 */
 	public static User login(String username, String password) {
 		User proposedUser = searchUserByUsername(username);
 
@@ -300,6 +361,11 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Collects the names of all students in a particular school.
+	 * 
+	 * @return a list of the names of all students ([first name] [last name])
+	 */
 	public static ArrayList<String> getStudentNames() {
 		ArrayList<String> studentNames = new ArrayList<String>();
 
@@ -312,6 +378,11 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Collects the names of all teachers in a particular school.
+	 * 
+	 * @return a list of the names of all teachers ([first name] [last name])
+	 */
 	public static ArrayList<String> getTeacherNames() {
 		ArrayList<String> teacherNames = new ArrayList<String>();
 
@@ -325,6 +396,11 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Collects the names of all classes in a particular school.
+	 * 
+	 * @return a list of the names of all classes
+	 */
 	public static ArrayList<String> getClassNames() {
 		ArrayList<String> classNames = new ArrayList<String>();
 
@@ -335,25 +411,36 @@ public class FileMaker {
 
 		return classNames;
 	}
-	
-	
+
+
+	/**
+	 * Collects the names of all classes the logged in user is in
+	 * 
+	 * @return a list of the classes the user is in
+	 */
 	public static ArrayList<String> getUserClasses() {
 		ArrayList<String> classNames = new ArrayList<String>();
-		
+
 		ArrayList<Class> classes = loggedInUser.getClasses();
 		for (Class c : classes) {
 			classNames.add(c.getName());
 		}
-		
+
 		return classNames;
 	}
-	
 
 
+	/**
+	 * Assigns a teacher to a class and confirms the assignment in the database.
+	 * 
+	 * @param className	the name of the class the teacher will be assigned to
+	 * @param teacherName the name of the teacher the class will have
+	 */
 	public static void assignTeacherToClass(String className, String teacherName) {
 		try {
 			ArrayList<String> contents = readFile();
 
+			// Determining where to write the information
 			int schoolIndex = -1;
 			for (int i = 0; i < contents.size(); i++) {
 				if (contents.get(i).equals(Integer.toString(currentSchoolID))) {
@@ -369,7 +456,6 @@ public class FileMaker {
 					break;
 				}
 			}
-			
 
 			int writeAtIndex = -1;
 			for (int k = classIndex; k < contents.size(); k++) {
@@ -379,19 +465,21 @@ public class FileMaker {
 				}
 			}
 
+			// Rewriting the file
 			FileWriter writer = new FileWriter(file, false);
 			BufferedWriter bWriter = new BufferedWriter(writer);
 
 			for (int i = 0; i < writeAtIndex; i++) {
 				bWriter.write(contents.get(i) + "\n");
 			}
-			
+
+			// Confirming assignment
 			User teacher = searchUserByName(teacherName);
 			String id = Integer.toString(teacher.getID());
 			SchoolManager.searchByID(currentSchoolID).searchClassByName(className).addTeacher(searchUserByName(teacherName));
-			
+			searchUserByName(teacherName).addClass(SchoolManager.searchByID(currentSchoolID).searchClassByName(className));
+
 			bWriter.write(id + "\n");
-			
 
 			for(int i = writeAtIndex; i < contents.size(); i++) {
 				bWriter.write(contents.get(i) + "\n");
@@ -399,14 +487,18 @@ public class FileMaker {
 
 			bWriter.close();
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 
+	/**
+	 * Assigns a student to a class and confirms the assignment in the database.
+	 * 
+	 * @param className the name of the class the student will be assigned to 
+	 * @param studentName the name of the student the class will have
+	 */
 	public static void assignStudentToClass(String className, String studentName) {
 		try {
 			ArrayList<String> contents = readFile();
@@ -444,16 +536,16 @@ public class FileMaker {
 			User student = searchUserByName(studentName);
 			String id = Integer.toString(student.getID());
 			SchoolManager.searchByID(currentSchoolID).searchClassByName(className).addTeacher(searchUserByName(studentName));
-			
+			searchUserByName(studentName).addClass(SchoolManager.searchByID(currentSchoolID).searchClassByName(className));
+
 			bWriter.write(id + "\n");
-			
+
 
 			for(int i = writeAtIndex; i < contents.size(); i++) {
 				bWriter.write(contents.get(i) + "\n");
 			}
 
 			bWriter.close();
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -462,8 +554,13 @@ public class FileMaker {
 	}
 
 
-
-
+	/**
+	 * Returns a User with the same username as the user-provided username. If
+	 * no users with the username exist, a null User is returned.
+	 * 
+	 * @param username the username being searched for
+	 * @return the User with that username
+	 */
 	public static User searchUserByUsername(String username) {
 
 		for (School s : SchoolManager.getSchools()) {
@@ -490,6 +587,13 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Returns a User with the same name as the user-provided name ([first name] 
+	 * [last name]). If no users with the name exist, a null User is returned.
+	 * 
+	 * @param name the name being searched for
+	 * @return the User with that name
+	 */
 	public static User searchUserByName(String name) {
 		for (School s : SchoolManager.getSchools()) {
 			for (Admin a : s.getAdmins()) {
@@ -509,13 +613,17 @@ public class FileMaker {
 				}
 			}
 		}
-
 		return null;
 	}
 
 
-
-
+	/**
+	 * Returns a class with the same name as the user-provided class name. If
+	 * no classes with the name exist, a null Class is returned.
+	 * 
+	 * @param className the class name being searched for
+	 * @return the Class with that name
+	 */
 	public static Class searchClass(String className) {
 		for (Class c : SchoolManager.searchByID(currentSchoolID).getClasses()) {
 			if (c.getName().equals(className)) {
@@ -526,6 +634,12 @@ public class FileMaker {
 	}
 
 
+	/**
+	 * Reads the file and returns an ArrayList of type String with the
+	 * contents of the file by line.
+	 * 
+	 * @return the contents of the file by line
+	 */
 	private static ArrayList<String> readFile() {
 		ArrayList<String> contents = new ArrayList<String>();
 
@@ -544,7 +658,10 @@ public class FileMaker {
 	}
 
 
-
+	/**
+	 * Sets up the users according to the database. Delimiters are used to ensure
+	 * the right type of user is created with the correct information.
+	 */
 	private static void setupGroups() {
 		ArrayList<String> contents = readFile();
 
@@ -553,11 +670,13 @@ public class FileMaker {
 		}
 
 		for (int i = 0; i < contents.size(); i++) {
+			// Making the school
 			if (contents.get(i).equals(Character.toString(DELIMITER_SCHOOL))) {
 				SchoolManager.addSchool(new School(contents.get(i + 1), Integer.parseInt(contents.get(i + 2))));
 				currentSchoolID = Integer.parseInt(contents.get(i + 2));
 			}
 
+			// Making the admins
 			if (contents.get(i).equals(Character.toString(DELIMITER_ADMIN))) {
 				int lines = -1;
 				for (int j = i; j < contents.indexOf(Character.toString(DELIMITER_TEACHER)); j++) {
@@ -579,6 +698,7 @@ public class FileMaker {
 				}
 			}
 
+			// Making the teachers
 			if (contents.get(i).equals(Character.toString(DELIMITER_TEACHER))) {
 				int lines = -1;
 				for (int j = i; j < contents.indexOf(Character.toString(DELIMITER_STUDENT)); j++) {
@@ -598,6 +718,7 @@ public class FileMaker {
 				}
 			}
 
+			// Making the students
 			if (contents.get(i).equals(Character.toString(DELIMITER_STUDENT))) {
 				int lines = -1;
 				for (int j = i; j < contents.indexOf(Character.toString(DELIMITER_CLASS)); j++) {
@@ -617,6 +738,7 @@ public class FileMaker {
 				}
 			}
 
+			// Making the classes
 			if (contents.get(i).equals(Character.toString(DELIMITER_CLASS))) {
 				int lines = -1;
 				ArrayList<String> classStuff = new ArrayList<String>();
@@ -654,22 +776,24 @@ public class FileMaker {
 						}
 					}
 
-
 					for (int n = 0; n < l; n++) {
 						classStuff.set(n, null);
 					}
 				}
-
-
-
 			}	
-
 			for (int x = 0; x < i; x++) {
 				contents.set(x, null);
 			}
-
 		}
-
 	}
 
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "FileManagement []";
+	}
+	
 }

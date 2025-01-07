@@ -125,5 +125,14 @@ public class Panel10BTeacherGrader extends JPanel {
 		sl.putConstraint(SpringLayout.WEST, goHome, 20, SpringLayout.EAST, goToA);
 		sl.putConstraint(SpringLayout.NORTH, goHome, 550, SpringLayout.NORTH, centerPanel);
 	}
+
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Panel10BTeacherGrader [centerPanel=" + centerPanel + ", sl=" + sl + ", table=" + table + "]";
+	}
 	
 }

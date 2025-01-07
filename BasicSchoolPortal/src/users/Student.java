@@ -21,12 +21,18 @@ public class Student extends User {
 	}
 
 
-
 	@Override
 	public boolean isStudent() {
 		return true;
 	}
 
-
+	
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Student []";
+	}
 
 }

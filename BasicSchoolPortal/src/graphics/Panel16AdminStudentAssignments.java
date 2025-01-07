@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-import files.FileMaker;
+import files.FileManagement;
 
 public class Panel16AdminStudentAssignments extends JPanel {
 
@@ -65,7 +65,7 @@ public class Panel16AdminStudentAssignments extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FileMaker.assignStudentToClass(selectClass.getSelectedItem().toString(), selectStudent.getSelectedItem().toString());
+				FileManagement.assignStudentToClass(selectClass.getSelectedItem().toString(), selectStudent.getSelectedItem().toString());
 			}
 			
 		});
@@ -103,17 +103,27 @@ public class Panel16AdminStudentAssignments extends JPanel {
 		selectStudent.removeAllItems();
 		
 		
-		ArrayList<String> classNames = FileMaker.getClassNames();
+		ArrayList<String> classNames = FileManagement.getClassNames();
 		for (String s : classNames) {
 			selectClass.addItem(s);
 		}
 		
-		ArrayList<String> studentNames = FileMaker.getStudentNames();
+		ArrayList<String> studentNames = FileManagement.getStudentNames();
 		for (String s: studentNames) {
 			selectStudent.addItem(s);
 		}
 		
 		repaint();
+	}
+
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Panel16AdminStudentAssignments [centerPanel=" + centerPanel + ", sl=" + sl + ", selectClass="
+				+ selectClass + ", selectStudent=" + selectStudent + "]";
 	}
 	
 }

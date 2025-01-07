@@ -12,15 +12,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import files.FileMaker;
+import files.FileManagement;
 import school.SchoolManager;
 import users.Admin;
 import users.User;
 
 
 /**
+ * The Frame class holds the graphical user interface's structure for the program.
+ * It maintains everything used to change the pages of the program.
  * 
- * 
+ * @author Daniel Santillan
+ * @version 1.0
  */
 public class Frame extends JFrame {
 
@@ -32,12 +35,12 @@ public class Frame extends JFrame {
 	 * 	interchanging of pages
 	 */
 	private CardLayout cl;
-	
-	private User loggedInUser;
 
 
 	/**
-	 * 
+	 * Constructs a Frame with a title and specific information for the window.
+	 * The constructor also gives the frame a card layout prepared with all of
+	 * the JPanels needed for the project. 
 	 */
 	public Frame() {
 		setTitle("Basic School Portal");
@@ -58,7 +61,12 @@ public class Frame extends JFrame {
 	}
 
 
-
+	/**
+	 * Prepares the card layout and all the cards (JPanels) necessary for this
+	 * project. It also creates the buttons that swap between pages and the
+	 * ActionListener that distinguishes the buttons and ensures the user goes
+	 * to the correct following page.
+	 */
 	private void prepareCardLayout() {
 		Panel1Introduction panelIntro = new Panel1Introduction();
 		Panel2Login panelLogin = new Panel2Login();
@@ -178,15 +186,15 @@ public class Frame extends JFrame {
 		buttonPanelAdminHomepageStudentAssignments.setMinimumSize(new Dimension(600, 45));
 		buttonPanelAdminHomepageStudentAssignments.setPreferredSize(new Dimension(600, 45));
 		buttonPanelAdminHomepageStudentAssignments.setFont(GraphicsConstants.montserratBold30);
-		
+
 		JButton buttonPanelAdminClassCreationReturn = new JButton("Return");
 		buttonPanelAdminHomepageStudentAssignments.setPreferredSize(dimensionButtonReturn);
 		buttonPanelAdminClassCreationReturn.setFont(GraphicsConstants.montserratBold30);
-		
+
 		JButton buttonPanelAdminTeacherAssignmentsReturn = new JButton("Return");
 		buttonPanelAdminTeacherAssignmentsReturn.setPreferredSize(dimensionButtonReturn);
 		buttonPanelAdminTeacherAssignmentsReturn.setFont(GraphicsConstants.montserratBold30);
-		
+
 		JButton buttonPanelAdminStudentAssignmentsReturn = new JButton("Return");
 		buttonPanelAdminStudentAssignmentsReturn.setPreferredSize(dimensionButtonReturn);
 		buttonPanelAdminStudentAssignmentsReturn.setFont(GraphicsConstants.montserratBold30);
@@ -194,32 +202,34 @@ public class Frame extends JFrame {
 
 		ActionListener al = new ActionListener() {
 
+			/**
+			 * Invoked when a button is pressed that is meant to swap to another
+			 * page of the program.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonPanelIntroRegister) {
+				if (e.getSource() == buttonPanelIntroRegister
+						|| e.getSource() == buttonPanelStudentHomepageGradingSim) {
 					cl.next(container);
 					cl.next(container);
-				} else if (e.getSource() == buttonPanelIntroLogin) {
+				} else if (e.getSource() == buttonPanelIntroLogin
+						|| e.getSource() == buttonPanelStudentHomepageViewGrades) {
 					cl.next(container);
 				} else if (e.getSource() == buttonPanelLoginReturn || 
 						e.getSource() == buttonPanelRegisterReturn) {
 					cl.first(container);
-					
-					
-					
+
+
 				} else if (e.getSource() == buttonPanelRegisterCreate) {
 					String[] information = panelRegister.obtainInformation();
-					FileMaker.addSchool(information);
-					
+					FileManagement.addSchool(information);
+
 					cl.next(container);
-					
-					
-					
-					
+
 				} else if (e.getSource() == buttonPanelLoginLogin) {
 					panelLogin.resetFailed();
 					String[] information = panelLogin.obtainInformation();
-					User login = FileMaker.login(information[0], information[1]);
+					User login = FileManagement.login(information[0], information[1]);
 					if (login != null) {
 						if (login.isAdmin()) {
 							for (int i = 0; i < 12; i++) {
@@ -238,51 +248,37 @@ public class Frame extends JFrame {
 					} else {
 						panelLogin.failed();
 					}
-					
-					
-					
-				} else if (e.getSource() == buttonPanelStudentHomepageViewGrades) {
-					cl.next(container);
-				} else if (e.getSource() == buttonPanelStudentHomepageGradingSim) {
-					cl.next(container);
-					cl.next(container);
-				} else if (e.getSource() == buttonPanelStudentHomepageViewClass) {
+
+				} else if (e.getSource() == buttonPanelStudentHomepageViewClass
+						|| e.getSource() == buttonPanelTeacherHomepageEdits) {
 					cl.next(container);
 					cl.next(container);
 					cl.next(container);
-				} else if (e.getSource() == buttonPanelStudentGradesReturn) {
+				} else if (e.getSource() == buttonPanelStudentGradesReturn
+						|| e.getSource() == buttonPanelTeacherGraderReturn
+						|| e.getSource() == buttonPanelTeacherGraderGoToA
+						|| e.getSource() == buttonPanelAdminClassCreationReturn) {
 					cl.previous(container);
-				} else if (e.getSource() == buttonPanelStudentGradeSimReturn) {
-					cl.previous(container);
-					cl.previous(container);
-				} else if (e.getSource() == buttonPanelStudentRostersReturn) {
+				} else if (e.getSource() == buttonPanelStudentGradeSimReturn
+						|| e.getSource() == buttonPanelTeacherGraderReturnB
+						|| e.getSource() == buttonPanelAdminTeacherAssignmentsReturn) {
 					cl.previous(container);
 					cl.previous(container);
+				} else if (e.getSource() == buttonPanelStudentRostersReturn
+						|| e.getSource() == buttonPanelTeacherMessageEditsReturn
+						|| e.getSource() == buttonPanelAdminStudentAssignmentsReturn) {
 					cl.previous(container);
-				} else if (e.getSource() == buttonPanelTeacherHomepageGrader) {
-					cl.next(container);
-				} else if (e.getSource() == buttonPanelTeacherHomepageEdits) {
-					cl.next(container);
-					cl.next(container);
+					cl.previous(container);
+					cl.previous(container);
+				} else if (e.getSource() == buttonPanelTeacherHomepageGrader
+						|| e.getSource() == buttonPanelTeacherGraderGoToB
+						|| e.getSource() == buttonPanelAdminHomepageClassCreation) {
 					cl.next(container);
 				} else if (e.getSource() == buttonPanelTeacherHomepageViewClass) {
 					cl.next(container);
 					cl.next(container);
 					cl.next(container);
 					cl.next(container);
-				} else if (e.getSource() == buttonPanelTeacherGraderReturn) {
-					cl.previous(container);
-				} else if (e.getSource() == buttonPanelTeacherGraderGoToB) {
-					cl.next(container);
-				} else if (e.getSource() == buttonPanelTeacherGraderGoToA) {
-					cl.previous(container);
-				} else if (e.getSource() == buttonPanelTeacherGraderReturnB) {
-					cl.previous(container);
-					cl.previous(container);
-				} else if (e.getSource() == buttonPanelTeacherMessageEditsReturn) {
-					cl.previous(container);
-					cl.previous(container);
-					cl.previous(container);
 				} else if (e.getSource() == buttonPanelTeacherRosterReturn) {
 					cl.previous(container);
 					cl.previous(container);
@@ -296,8 +292,6 @@ public class Frame extends JFrame {
 					for (int i = 0; i < 10; i++) {
 						cl.previous(container);
 					}
-				} else if (e.getSource() == buttonPanelAdminHomepageClassCreation) {
-					cl.next(container);
 				} else if (e.getSource() == buttonPanelAdminHomepageTeacherAssignments) {
 					cl.next(container);
 					cl.next(container);
@@ -307,16 +301,7 @@ public class Frame extends JFrame {
 					cl.next(container);
 					cl.next(container);
 					panelAdminStudentAssignments.addContent();
-				} else if (e.getSource() == buttonPanelAdminClassCreationReturn) {
-					cl.previous(container);
-				} else if (e.getSource() == buttonPanelAdminTeacherAssignmentsReturn) {
-					cl.previous(container);
-					cl.previous(container);
-				} else if (e.getSource() == buttonPanelAdminStudentAssignmentsReturn) {
-					cl.previous(container);
-					cl.previous(container);
-					cl.previous(container);
-				}
+				} 
 			}
 		};
 
@@ -368,7 +353,7 @@ public class Frame extends JFrame {
 		panelAdminClassCreation.addChangePageButtons(buttonPanelAdminClassCreationReturn);
 		panelAdminTeacherAssignments.addChangePageButtons(buttonPanelAdminTeacherAssignmentsReturn);
 		panelAdminStudentAssignments.addChangePageButtons(buttonPanelAdminStudentAssignmentsReturn);
-		
+
 
 		container.add(panelIntro);
 		container.add(panelLogin);
@@ -390,4 +375,13 @@ public class Frame extends JFrame {
 
 	}
 
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Frame [container=" + container + ", cl=" + cl + "]";
+	}
+	
 }

@@ -1,6 +1,6 @@
 package run;
 
-import files.FileMaker;
+import files.FileManagement;
 import graphics.Frame;
 import school.SchoolManager;
 
@@ -9,6 +9,7 @@ import school.SchoolManager;
  * frame that lets users access and use the Basic School Portal.
  * 
  * @author Daniel Santillan
+ * @version 1.0
  */
 public class Run {
 
@@ -23,7 +24,7 @@ public class Run {
 		Frame frame = new Frame();
 		frame.setVisible(true);
 		
-		FileMaker.setup();
+		FileManagement.setup();
 		
 		System.out.println(new Run());
 	}

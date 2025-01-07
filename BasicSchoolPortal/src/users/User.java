@@ -94,9 +94,22 @@ public class User {
 		return id;
 	}
 	
+	public void addClass(Class c) {
+		classes.add(c);
+	}
+	
 	public ArrayList<Class> getClasses() {
 		return classes;
 	}
+
 	
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", username=" + username + ", password="
+				+ password + ", school=" + school + ", id=" + id + ", classes=" + classes + "]";
+	}	
 
 }

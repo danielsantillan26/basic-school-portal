@@ -12,20 +12,42 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SpringLayout;
 
+/**
+ * The Panel10TeacherGrader class constructs the tenth page of the project. This
+ * page encomapsses the start of the teacher grader, where teachers can add
+ * assignments. This was meant to be similar to my Teacher Grading Simulator
+ * project, but time constraints and complications with the file management
+ * prevented the implementation of this feature.
+ * 
+ * @author Daniel Santillan
+ * @version 1.0
+ */
 public class Panel10TeacherGrader extends JPanel {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
 	
+	/** The page center */
 	private JPanel centerPanel;
+	/** The page center layout */
 	private SpringLayout sl;
+	/** A JTable where assignments can be added */
 	private JTable table;
 	
+	
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	public Panel10TeacherGrader() {
 		setLayout(new BorderLayout());
 		createNorthPanel();
 		createCenterPanel();
 	}
 	
+	
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	private void createNorthPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
@@ -37,6 +59,11 @@ public class Panel10TeacherGrader extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the center portion of the panel. In this case, prompts to 
+	 * select classes to make assignments for and buttons to collect and 
+	 * reset data are made.
+	 */
 	private void createCenterPanel() {
 		sl = new SpringLayout();
 		centerPanel = new JPanel(sl);
@@ -115,7 +142,14 @@ public class Panel10TeacherGrader extends JPanel {
 		add(centerPanel, BorderLayout.CENTER);
 	}
 	
-	
+
+	/**
+	 * Adds buttons that change pages to the JPanel. These buttons were originally
+	 * created in the Frame class.
+	 * 
+	 * @param goToB a button that goes to the second part of this page
+	 * @param goHome a button that returns to the teacher homepage
+	 */
 	public void addChangePageButtons(JButton goToB, JButton goHome) {
 		centerPanel.add(goToB);
 		centerPanel.add(goHome);
@@ -125,6 +159,13 @@ public class Panel10TeacherGrader extends JPanel {
 		sl.putConstraint(SpringLayout.WEST, goHome, 20, SpringLayout.EAST, goToB);
 		sl.putConstraint(SpringLayout.NORTH, goHome, 550, SpringLayout.NORTH, centerPanel);
 	}
-	
-	
+
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Panel10TeacherGrader [centerPanel=" + centerPanel + ", sl=" + sl + ", table=" + table + "]";
+	}
 }

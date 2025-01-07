@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SpringLayout;
 
-import files.FileMaker;
+import files.FileManagement;
 
 public class Panel12TeacherRosters extends JPanel {
 
@@ -90,5 +90,14 @@ public class Panel12TeacherRosters extends JPanel {
 		sl.putConstraint(SpringLayout.WEST, goHome, 75, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, goHome, 400, SpringLayout.NORTH, centerPanel);
 	}
+
 	
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "Panel12TeacherRosters [centerPanel=" + centerPanel + ", sl=" + sl + ", rosterTable=" + rosterTable
+				+ "]";
+	}
 }

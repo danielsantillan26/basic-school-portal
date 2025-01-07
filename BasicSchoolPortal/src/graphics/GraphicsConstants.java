@@ -11,16 +11,30 @@ import java.awt.Font;
  * for implemented layouts that help form the program's graphical user
  * interface.
  * 
- * @version 1.0
  * @author Daniel Santillan
+ * @version 1.0
  */
 public class GraphicsConstants {
-	
-	public static final Color headerColor = new Color(0, 179, 255);
-	public static final Color centerColor = new Color(209, 241, 255);
-	public static final Font montserratBold50 = new Font("Montserrat", Font.BOLD, 50);
-	public static final Font montserratBold30 = new Font("Montserrat", Font.BOLD, 30);
-	public static final Font montserratBold15 = new Font("Montserrat", Font.BOLD, 15);
-	public static final Dimension textFieldDimension = new Dimension(500, 75);
 
+	/** The color used for the page header */
+	public static final Color headerColor = new Color(0, 179, 255);
+	/** The color used for the page center */
+	public static final Color centerColor = new Color(209, 241, 255);
+	/** A Montserrat Bold sized 50, often used with prompts */
+	public static final Font montserratBold50 = new Font("Montserrat", Font.BOLD, 50);
+	/** A Montserrat Bold sized 30, often used with text boxes */
+	public static final Font montserratBold30 = new Font("Montserrat", Font.BOLD, 30);
+	/** A Montserrat Bold sized 15, often used with small failed messages */
+	public static final Font montserratBold15 = new Font("Montserrat", Font.BOLD, 15);
+	/** A dimension often used for buttons with "Return" */
+	public static final Dimension textFieldDimension = new Dimension(500, 75);
+	
+	
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "GraphicsConstants []";
+	}
 }
