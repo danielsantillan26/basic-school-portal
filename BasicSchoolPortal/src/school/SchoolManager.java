@@ -21,6 +21,14 @@ public class SchoolManager {
 	
 	
 	/**
+	 * Constructs the schools list. Unused in lieu of setup().
+	 */
+	public SchoolManager() {
+		schools = new ArrayList<School>();
+	}
+	
+	
+	/**
 	 * Instantiates the list of schools. 
 	 */
 	public static void setup() {

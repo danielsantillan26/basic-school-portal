@@ -31,6 +31,14 @@ public class GraphicsConstants {
 	
 	
 	/**
+	 * An empty constructor.
+	 */
+	public GraphicsConstants() {
+		
+	}
+	
+	
+	/**
 	 * This is the toString method for this class.
 	 */
 	@Override

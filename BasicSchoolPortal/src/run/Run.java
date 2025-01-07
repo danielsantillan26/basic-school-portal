@@ -12,13 +12,21 @@ import school.SchoolManager;
  * @version 1.0
  */
 public class Run {
+	
+	/**
+	 * An unused constructor.
+	 */
+	public Run() {
+		
+	}
+	
 
 	/**
 	 * The main method instantiates a frame that holds all the contents of the
 	 * Basic School Portal. It sets the frame as visible (so users can see it)
 	 * and prints the toString method for this class.
 	 * 
-	 * @param args
+	 * @param args main method arguments
 	 */
 	public static void main(String[] args) {
 		Frame frame = new Frame();

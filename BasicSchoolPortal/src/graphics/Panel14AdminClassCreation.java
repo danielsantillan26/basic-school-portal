@@ -14,15 +14,32 @@ import javax.swing.SpringLayout;
 
 import files.FileManagement;
 
+/**
+ * The Panel14AdminClassCreation class constructs the fourteenth page of the
+ * project. This page encompasses the area that allows administrators to 
+ * create classes that will be in the database.
+ * 
+ * @author Daniel Santillan
+ * @version 1.0
+ */
 public class Panel14AdminClassCreation extends JPanel {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
+	
+	/** The page center */
 	private JPanel centerPanel;
+	/** The page center layout */
 	private SpringLayout sl;
 
+	/** A JTextfield with the proposed class name */
 	private JTextField givenClassName;
 
 
+	/**
+	 * Constructs the JPanel, adding the buttons and title
+	 * graphics.
+	 */
 	public Panel14AdminClassCreation() {
 		setLayout(new BorderLayout());
 		createNorthPanel();
@@ -30,6 +47,9 @@ public class Panel14AdminClassCreation extends JPanel {
 	}
 
 
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	private void createNorthPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
@@ -41,6 +61,10 @@ public class Panel14AdminClassCreation extends JPanel {
 	}
 
 
+	/**
+	 * Constructs the center portion of the panel. In this case, prompts to 
+	 * enter a new class name and confirm the information are made.
+	 */
 	private void createCenterPanel() {
 		sl = new SpringLayout();
 		centerPanel = new JPanel(sl);
@@ -57,6 +81,9 @@ public class Panel14AdminClassCreation extends JPanel {
 		enterInformation.setFont(GraphicsConstants.montserratBold30);
 		enterInformation.addActionListener(new ActionListener() {
 
+			/**
+			 * Invoked when a class is added.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String className = givenClassName.getText();
@@ -81,6 +108,12 @@ public class Panel14AdminClassCreation extends JPanel {
 	}
 
 
+	/**
+	 * Adds buttons that change pages to the JPanel. These buttons were originally
+	 * created in the Frame class.
+	 * 
+	 * @param goHome a button that returns to the admin homepage
+	 */
 	public void addChangePageButtons(JButton goHome) {
 		centerPanel.add(goHome);
 

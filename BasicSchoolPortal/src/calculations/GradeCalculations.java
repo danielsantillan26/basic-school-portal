@@ -14,6 +14,14 @@ package calculations;
 public class GradeCalculations {
 
 	/**
+	 * An empty constructor.
+	 */
+	public GradeCalculations() {
+		
+	}
+	
+	
+	/**
 	 * Returns the required semester exam grade to achieve the desired final
 	 * grade entered by the user. The value is rounded for the program's
 	 * convenience.

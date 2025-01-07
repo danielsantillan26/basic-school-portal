@@ -15,19 +15,37 @@ import javax.swing.SpringLayout;
 
 import files.FileManagement;
 
+/**
+ * The Panel12TeacherRosters class constructs the twelfth page of the project.
+ * This page encompasses a teacher's ability to view their class rosters. 
+ */
 public class Panel12TeacherRosters extends JPanel {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
+	
+	/** The page center */
 	private JPanel centerPanel;
+	/** The page center layout */
 	private SpringLayout sl;
+	/** A table to hold the roster */
 	private JTable rosterTable;
 	
+	
+	/**
+	 * Constructs the JPanel, adding the buttons and title
+	 * graphics.
+	 */
 	public Panel12TeacherRosters() {
 		setLayout(new BorderLayout());
 		createNorthPanel();
 		createCenterPanel();
 	}
 	
+	
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	private void createNorthPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
@@ -40,6 +58,11 @@ public class Panel12TeacherRosters extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the center portion of the panel. In this case, labels asking
+	 * to enter the class (in a JComboBox) are made along with the table that
+	 * was meant to hold the rosters.
+	 */
 	private void createCenterPanel() {
 		sl = new SpringLayout();
 		centerPanel = new JPanel(sl);
@@ -84,6 +107,12 @@ public class Panel12TeacherRosters extends JPanel {
 	}
 	
 	
+	/**
+	 * Adds buttons that change pages to the JPanel. These buttons were originally
+	 * created in the Frame class.
+	 * 
+	 * @param goHome a button to return to the teacher homepage
+	 */
 	public void addChangePageButtons(JButton goHome) {
 		centerPanel.add(goHome);
 		

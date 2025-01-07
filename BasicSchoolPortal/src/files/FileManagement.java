@@ -60,6 +60,14 @@ public class FileManagement {
 	private static int currentSchoolID;
 	/** The User who is currently loged in to the program. */
 	private static User loggedInUser;
+	
+	
+	/**
+	 * An empty constructor.
+	 */
+	public FileManagement() {
+		
+	}
 
 
 	/**

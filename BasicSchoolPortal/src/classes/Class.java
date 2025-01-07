@@ -33,7 +33,7 @@ public class Class {
 	 * Constructs a new Class by assigning the class name. To be used when a
 	 * class is formed during the running of the program.
 	 * 
-	 * @param name
+	 * @param name the class name
 	 */
 	public Class(String name) {
 		this.name = name;

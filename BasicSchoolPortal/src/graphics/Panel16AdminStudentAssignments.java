@@ -15,15 +15,34 @@ import javax.swing.SpringLayout;
 
 import files.FileManagement;
 
+/**
+ * The Panel16AdminStudentAssignments class constructs the sixteenth page of 
+ * the project. This page encompasses an administrator's ability to assign
+ * students to a particular class in the database.
+ * 
+ * @author Daniel Santillan
+ * @version 1.0
+ */
 public class Panel16AdminStudentAssignments extends JPanel {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
+	
+	/** The page center */
 	private JPanel centerPanel;
+	/** The page center layout */
 	private SpringLayout sl;
+	
+	/** A JComboBox with the list of classes */
 	private JComboBox<String> selectClass;
+	/** A JComboBox with the list of students */
 	private JComboBox<String> selectStudent;
 	
 	
+	/**
+	 * Constructs the JPanel, adding the buttons and title
+	 * graphics.
+	 */
 	public Panel16AdminStudentAssignments() {
 		setLayout(new BorderLayout());
 		createNorthPanel();
@@ -31,6 +50,9 @@ public class Panel16AdminStudentAssignments extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	private void createNorthPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
@@ -42,6 +64,11 @@ public class Panel16AdminStudentAssignments extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the center portion of the panel. In this case, prompts to
+	 * select classes and students with a button to confirm the assignments
+	 * are made.
+	 */
 	private void createCenterPanel() {
 		sl = new SpringLayout();
 		centerPanel = new JPanel(sl);
@@ -63,6 +90,9 @@ public class Panel16AdminStudentAssignments extends JPanel {
 		enterInformation.setFont(GraphicsConstants.montserratBold30);
 		enterInformation.addActionListener(new ActionListener() {
 
+			/**
+			 * Invoked when a student assignment is made.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FileManagement.assignStudentToClass(selectClass.getSelectedItem().toString(), selectStudent.getSelectedItem().toString());
@@ -91,6 +121,12 @@ public class Panel16AdminStudentAssignments extends JPanel {
 	}
 	
 	
+	/**
+	 * Adds buttons that change pages to the JPanel. These buttons were originally
+	 * created in the Frame class.
+	 * 
+	 * @param goHome a button that returns to the admin homepage
+	 */
 	public void addChangePageButtons(JButton goHome) {
 		centerPanel.add(goHome);
 		sl.putConstraint(SpringLayout.WEST, goHome, 900, SpringLayout.WEST, centerPanel);
@@ -98,10 +134,13 @@ public class Panel16AdminStudentAssignments extends JPanel {
 	}
 	
 	
+	/**
+	 * Refreshes the select class and select student JComboBox with information
+	 * from the data file.
+	 */
 	public void addContent() {
 		selectClass.removeAllItems();
 		selectStudent.removeAllItems();
-		
 		
 		ArrayList<String> classNames = FileManagement.getClassNames();
 		for (String s : classNames) {

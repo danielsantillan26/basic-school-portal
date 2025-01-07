@@ -9,12 +9,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+/**
+ * The Panel13AdminHomepage class constructs the thirteenth page of the
+ * project. This page encompasses the admin homepage of the project, where
+ * administrators can navigate to other pages meant for administrators.
+ * 
+ * @author Daniel Santillan
+ * @version 1.0
+ */
 public class Panel13AdminHomepage extends JPanel {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
+	
+	/** The page center */
 	private JPanel centerPanel;
+	/** The page center layout */
 	private SpringLayout sl;
 	
+	
+	/**
+	 * Constructs the JPanel, adding the buttons and title
+	 * graphics.
+	 */
 	public Panel13AdminHomepage() {
 		setLayout(new BorderLayout());
 		createNorthPanel();
@@ -22,6 +39,9 @@ public class Panel13AdminHomepage extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	private void createNorthPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
@@ -33,6 +53,9 @@ public class Panel13AdminHomepage extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the center portion of the panel.
+	 */
 	private void createCenterPanel() {
 		sl = new SpringLayout();
 		centerPanel = new JPanel(sl);
@@ -42,6 +65,15 @@ public class Panel13AdminHomepage extends JPanel {
 	}
 	
 	
+	/**
+	 * Adds buttons that change pages to the JPanel. These buttons were originally
+	 * created in the Frame class.
+	 * 
+	 * @param userCreation a button to go to the user creation page
+	 * @param classCreation a button to go to the class creation page
+	 * @param teacherAssignments a button to go to the teacher assignment page
+	 * @param studentAssignments a button to go to the student assignment page
+	 */
 	public void addChangePageButtons(JButton userCreation, JButton classCreation, JButton teacherAssignments, JButton studentAssignments) {
 		centerPanel.add(userCreation);
 		centerPanel.add(classCreation);

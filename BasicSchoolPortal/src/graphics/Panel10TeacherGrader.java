@@ -36,7 +36,8 @@ public class Panel10TeacherGrader extends JPanel {
 	
 	
 	/**
-	 * Constructs the northern portion of the panel, adding the header.
+	 * Constructs the JPanel, adding the buttons and title
+	 * graphics.
 	 */
 	public Panel10TeacherGrader() {
 		setLayout(new BorderLayout());

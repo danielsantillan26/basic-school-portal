@@ -11,12 +11,31 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 
+/**
+ * The Panel11TeacherMessageEdits class constructs the eleventh page of the
+ * project. This class encompasses a field that allows teachers to make a 
+ * message for each of their classes, similar to how a school portal allows
+ * teachers to edit their class pages. Due to time constraints, this feature
+ * was not added in the first version of this program.
+ * 
+ * @author Daniel Santillan
+ * @version 1.0
+ */
 public class Panel11TeacherMessageEdits extends JPanel {
 
+	/** Version */
 	private static final long serialVersionUID = 1L;
+	
+	/** The page center */
 	private JPanel centerPanel;
+	/** The page center layout */
 	private SpringLayout sl;
 	
+	
+	/**
+	 * Constructs the JPanel, adding the buttons and title
+	 * graphics.
+	 */
 	public Panel11TeacherMessageEdits() {
 		setLayout(new BorderLayout());
 		createNorthPanel();
@@ -24,6 +43,9 @@ public class Panel11TeacherMessageEdits extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the northern portion of the panel, adding the header.
+	 */
 	private void createNorthPanel() {
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(GraphicsConstants.headerColor);
@@ -35,6 +57,10 @@ public class Panel11TeacherMessageEdits extends JPanel {
 	}
 	
 	
+	/**
+	 * Constructs the center portion of the panel. In this case, prompts to 
+	 * enter a message and a field for said message is made.
+	 */
 	private void createCenterPanel() {
 		sl = new SpringLayout();
 		centerPanel = new JPanel(sl);
@@ -72,6 +98,12 @@ public class Panel11TeacherMessageEdits extends JPanel {
 	}
 	
 	
+	/**
+	 * Adds buttons that change pages to the JPanel. These buttons were originally
+	 * created in the Frame class.
+	 * 
+	 * @param goHome a button to return to the teacher homepage
+	 */
 	public void addChangePageButtons(JButton goHome) {
 		centerPanel.add(goHome);
 		sl.putConstraint(SpringLayout.WEST, goHome, 75, SpringLayout.WEST, centerPanel);
