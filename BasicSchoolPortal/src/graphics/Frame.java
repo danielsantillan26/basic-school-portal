@@ -175,7 +175,8 @@ public class Frame extends JFrame {
 		buttonPanelAdminHomepageTeacherAssignments.setFont(GraphicsConstants.montserratBold30);
 
 		JButton buttonPanelAdminHomepageStudentAssignments = new JButton("Assign Students");
-		buttonPanelAdminHomepageStudentAssignments.setPreferredSize(new Dimension(400, 45));
+		buttonPanelAdminHomepageStudentAssignments.setMinimumSize(new Dimension(600, 45));
+		buttonPanelAdminHomepageStudentAssignments.setPreferredSize(new Dimension(600, 45));
 		buttonPanelAdminHomepageStudentAssignments.setFont(GraphicsConstants.montserratBold30);
 		
 		JButton buttonPanelAdminClassCreationReturn = new JButton("Return");
@@ -291,7 +292,7 @@ public class Frame extends JFrame {
 						cl.next(container);
 					}
 				} else if (e.getSource() == buttonPanelAdminHomepageCreateUsers) {
-					for (int i = 0; i < 11; i++) {
+					for (int i = 0; i < 10; i++) {
 						cl.previous(container);
 					}
 				} else if (e.getSource() == buttonPanelAdminHomepageClassCreation) {
@@ -299,10 +300,12 @@ public class Frame extends JFrame {
 				} else if (e.getSource() == buttonPanelAdminHomepageTeacherAssignments) {
 					cl.next(container);
 					cl.next(container);
+					panelAdminTeacherAssignments.addContent();
 				} else if (e.getSource() == buttonPanelAdminHomepageStudentAssignments) {
 					cl.next(container);
 					cl.next(container);
 					cl.next(container);
+					panelAdminStudentAssignments.addContent();
 				} else if (e.getSource() == buttonPanelAdminClassCreationReturn) {
 					cl.previous(container);
 				} else if (e.getSource() == buttonPanelAdminTeacherAssignmentsReturn) {

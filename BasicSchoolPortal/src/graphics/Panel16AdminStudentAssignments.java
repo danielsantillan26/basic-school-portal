@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,11 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+import files.FileMaker;
+
 public class Panel16AdminStudentAssignments extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel centerPanel;
 	private SpringLayout sl;
+	private JComboBox<String> selectClass;
+	private JComboBox<String> selectStudent;
 	
 	
 	public Panel16AdminStudentAssignments() {
@@ -43,13 +48,13 @@ public class Panel16AdminStudentAssignments extends JPanel {
 		JLabel enterClass = new JLabel("Select Class");
 		enterClass.setFont(GraphicsConstants.montserratBold50);
 		
-		JComboBox<String> selectClass = new JComboBox<String>();
+		selectClass = new JComboBox<String>();
 		selectClass.setFont(GraphicsConstants.montserratBold30);
 		
 		JLabel enterStudent = new JLabel("Select Student");
 		enterStudent.setFont(GraphicsConstants.montserratBold50);
 		
-		JComboBox<String> selectStudent = new JComboBox<String>();
+		selectStudent = new JComboBox<String>();
 		selectStudent.setFont(GraphicsConstants.montserratBold30);
 		
 		JButton enterInformation = new JButton("Confirm");
@@ -80,6 +85,21 @@ public class Panel16AdminStudentAssignments extends JPanel {
 		centerPanel.add(goHome);
 		sl.putConstraint(SpringLayout.WEST, goHome, 900, SpringLayout.WEST, centerPanel);
 		sl.putConstraint(SpringLayout.NORTH, goHome, 550, SpringLayout.NORTH, centerPanel);
+	}
+	
+	
+	public void addContent() {
+		ArrayList<String> classNames = FileMaker.getClassNames();
+		for (String s : classNames) {
+			selectClass.addItem(s);
+		}
+		
+		ArrayList<String> studentNames = FileMaker.getStudentNames();
+		for (String s: studentNames) {
+			selectStudent.addItem(s);
+		}
+		
+		repaint();
 	}
 	
 }

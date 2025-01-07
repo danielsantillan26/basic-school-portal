@@ -18,6 +18,10 @@ public class Teacher extends User {
 	}
 	
 	
+	public void addClass(Class c) {
+		classes.add(c);
+	}
+	
 	
 	@Override
 	public boolean isTeacher() {

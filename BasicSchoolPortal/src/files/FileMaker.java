@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import classes.Class;
 import school.School;
 import school.SchoolManager;
 import users.Admin;
@@ -28,6 +29,9 @@ public class FileMaker {
 	private static final char DELIMITER_STUDENT = '师';
 	private static final char DELIMITER_CLASS = '课';
 	private static final char DELIMITER_END = '端';
+	private static final char DELIMITER_CLASS_CLASS = '大';
+	private static final char DELIMITER_CLASS_TEACHER = '张';
+	private static final char DELIMITER_CLASS_STUDENT = '伟';
 
 	public static int currentSchoolID;
 	private static SchoolManager sm;
@@ -95,6 +99,7 @@ public class FileMaker {
 			for (int j = schoolIndex; j < contents.size(); j++) {
 				if (contents.get(j).equals(Character.toString(DELIMITER_TEACHER))) {
 					writeAtIndex = j - 1;
+					break;
 				}
 			}
 
@@ -144,6 +149,7 @@ public class FileMaker {
 			for (int j = schoolIndex; j < contents.size(); j++) {
 				if (contents.get(j).equals(Character.toString(DELIMITER_STUDENT))) {
 					writeAtIndex = j - 1;
+					break;
 				}
 			}
 
@@ -194,6 +200,7 @@ public class FileMaker {
 			for (int j = schoolIndex; j < contents.size(); j++) {
 				if (contents.get(j).equals(Character.toString(DELIMITER_CLASS))) {
 					writeAtIndex = j - 1;
+					break;
 				}
 			}
 
@@ -218,10 +225,54 @@ public class FileMaker {
 				bWriter.write(contents.get(i) + "\n");
 			}
 
-
 			bWriter.close();
 
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public static void addClass(String className) {
+		try {
+			ArrayList<String> contents = readFile();
+			
+			int schoolIndex = -1;
+			for (int i = 0; i < contents.size(); i++) {
+				if (contents.get(i).equals(Integer.toString(currentSchoolID))) {
+					schoolIndex = i;
+				}
+			}
+
+			int writeAtIndex = -1;
+			for (int j = schoolIndex; j < contents.size(); j++) {
+				if (contents.get(j).equals(Character.toString(DELIMITER_END))) {
+					writeAtIndex = j - 1;
+					break;
+				}
+			}
+			
+			FileWriter writer = new FileWriter(file, false);
+			BufferedWriter bWriter = new BufferedWriter(writer);
+
+			for (int i = 0; i < writeAtIndex; i++) {
+				bWriter.write(contents.get(i) + "\n");
+			}
+
+			Class c = SchoolManager.searchByID(currentSchoolID).addClass(new Class(className));
+			bWriter.write("\n" + DELIMITER_CLASS_CLASS + "\n");
+			bWriter.write(c.getName() + "\n");
+			bWriter.write("\n" + DELIMITER_CLASS_STUDENT + "\n");
+			bWriter.write("\n" + DELIMITER_CLASS_TEACHER + "\n");
+
+			for(int i = writeAtIndex; i < contents.size(); i++) {
+				bWriter.write(contents.get(i) + "\n");
+			}
+
+			bWriter.close();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -242,7 +293,48 @@ public class FileMaker {
 			}
 		}
 		
-
+	}
+	
+	
+	public static ArrayList<String> getStudentNames() {
+		ArrayList<String> studentNames = new ArrayList<String>();
+		
+		ArrayList<Student> students = SchoolManager.searchByID(currentSchoolID).getStudents();
+		for (Student s : students) {
+			studentNames.add(s.getFirstName() + " " + s.getLastName());
+		}
+		
+		return studentNames;
+	}
+	
+	
+	public static ArrayList<String> getTeacherNames() {
+		ArrayList<String> teacherNames = new ArrayList<String>();
+		
+		ArrayList<Teacher> teachers = SchoolManager.searchByID(currentSchoolID).getTeachers();
+		for (Teacher t : teachers) {
+			teacherNames.add(t.getFirstName() + " " + t.getLastName());
+		}
+		
+		return teacherNames;
+		
+	}
+	
+	
+	public static ArrayList<String> getClassNames() {
+		ArrayList<String> classNames = new ArrayList<String>();
+		
+		ArrayList<Class> classes = SchoolManager.searchByID(currentSchoolID).getClasses();
+		for (Class c : classes) {
+			classNames.add(c.getName());
+		}
+		
+		return classNames;
+	}
+	
+	
+	public static void assignTeacherToClass(String className, String teacherName) {
+		searchUser(teacherName);
 	}
 
 
@@ -270,6 +362,16 @@ public class FileMaker {
 
 		return null;
 	}
+	
+	
+	public static Class searchClass(String className) {
+		for (Class c : SchoolManager.searchByID(currentSchoolID).getClasses()) {
+			if (c.getName().equals(className)) {
+				return c;
+			}
+		}
+		return null;
+	}
 
 
 	private static ArrayList<String> readFile() {
@@ -281,7 +383,7 @@ public class FileMaker {
 			while ((line = reader.readLine()) != null) {
 				contents.add(line);
 			}
-
+			reader.close();
 		} catch (Exception e) {
 
 		}
@@ -362,6 +464,23 @@ public class FileMaker {
 					SchoolManager.searchByID(currentSchoolID).addStudent(new Student(firstName, lastName, username, password, SchoolManager.searchByID(currentSchoolID), id));
 				}
 			}
+			
+			if (contents.get(i).equals(Character.toString(DELIMITER_CLASS))) {
+				int lines = -1;
+				for (int j = i; j < contents.indexOf(Character.toString(DELIMITER_END)); j++) {
+					lines++;
+				}
+				
+				int numClasses = 0;
+				for (int k = i; k < i + lines; k++) {
+					if (contents.get(k).equals(Character.toString(DELIMITER_CLASS_CLASS))) {
+						numClasses++;
+					}
+				}
+				
+				
+				
+			}	
 			
 			for (int x = 0; x < i; x++) {
 				contents.set(x, null);

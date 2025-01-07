@@ -24,6 +24,18 @@ public class Class {
 		this.teachers = teachers;
 		this.students = students;
 	}
+	
+	
+	public void addTeacher(Teacher t) {
+		teachers.add(t);
+	}
+	
+	
+	public void addStudent(Student s) {
+		students.add(s);
+	}
+	
+	
 
 	public String getName() {
 		return name;

@@ -3,6 +3,7 @@ package school;
 import java.util.ArrayList;
 
 import users.*;
+import classes.Class;
 
 
 public class School {
@@ -13,6 +14,7 @@ public class School {
 	private ArrayList<Admin> admins;
 	private ArrayList<Teacher> teachers;
 	private ArrayList<Student> students;
+	private ArrayList<Class> classes;
 
 
 	public School(String name) {
@@ -20,6 +22,7 @@ public class School {
 		admins = new ArrayList<Admin>();
 		teachers = new ArrayList<Teacher>();
 		students = new ArrayList<Student>();
+		classes = new ArrayList<Class>();
 		id = (int) (Math.random()*1000000000);
 	}
 
@@ -29,6 +32,7 @@ public class School {
 		admins = new ArrayList<Admin>();
 		teachers = new ArrayList<Teacher>();
 		students = new ArrayList<Student>();
+		classes = new ArrayList<Class>();
 	}
 
 
@@ -47,6 +51,11 @@ public class School {
 	public Student addStudent(Student student) {
 		students.add(student);
 		return student;
+	}
+	
+	public Class addClass(Class course) {
+		classes.add(course);
+		return course;
 	}
 
 
@@ -72,9 +81,9 @@ public class School {
 		return students;
 	}
 
-
-
-
+	public ArrayList<Class> getClasses() {
+		return classes;
+	}
 
 
 }
