@@ -7,7 +7,6 @@ import school.School;
 
 public class Teacher extends User {
 
-	private ArrayList<Class> classes;
 	
 	public Teacher(String firstName, String lastName, String username, String password, School school) {
 		super(firstName, lastName, username, password, school);
@@ -19,7 +18,7 @@ public class Teacher extends User {
 	
 	
 	public void addClass(Class c) {
-		classes.add(c);
+		super.classes.add(c);
 	}
 	
 	

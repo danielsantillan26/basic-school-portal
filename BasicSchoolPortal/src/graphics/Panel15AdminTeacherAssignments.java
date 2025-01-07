@@ -2,6 +2,8 @@ package graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -59,6 +61,14 @@ public class Panel15AdminTeacherAssignments extends JPanel {
 
 		JButton enterInformation = new JButton("Confirm");
 		enterInformation.setFont(GraphicsConstants.montserratBold30);
+		enterInformation.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				FileMaker.assignTeacherToClass(selectClass.getSelectedItem().toString(), selectTeacher.getSelectedItem().toString());
+			}
+			
+		});
 
 		centerPanel.add(enterClass);
 		centerPanel.add(selectClass);
@@ -88,6 +98,9 @@ public class Panel15AdminTeacherAssignments extends JPanel {
 	}
 	
 	public void addContent() {
+		selectClass.removeAllItems();
+		selectTeacher.removeAllItems();
+		
 		ArrayList<String> classNames = FileMaker.getClassNames();
 		for (String s : classNames) {
 			selectClass.addItem(s);

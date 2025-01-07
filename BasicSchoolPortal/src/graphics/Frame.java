@@ -233,6 +233,7 @@ public class Frame extends JFrame {
 							cl.next(container);
 							cl.next(container);
 							cl.next(container);
+							panelStudentHomepage.addClasses();
 						}
 					} else {
 						panelLogin.failed();

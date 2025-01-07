@@ -1,5 +1,8 @@
 package users;
 
+import java.util.ArrayList;
+
+import classes.Class;
 import school.School;
 
 public class User {
@@ -10,6 +13,7 @@ public class User {
 	private String password;
 	private School school;
 	private int id;
+	protected ArrayList<Class> classes;
 	
 	public User(String firstName, String lastName, String username, String password, School school) {
 		this.firstName = firstName;
@@ -18,6 +22,7 @@ public class User {
 		this.password = password;
 		this.school = school;
 		id = (int)(Math.random()*1000000);
+		classes = new ArrayList<Class>();
 	}
 	
 	public User(String firstName, String lastName, String username, String password, School school, int  id) {
@@ -27,6 +32,7 @@ public class User {
 		this.password = password;
 		this.school = school;
 		this.id = id;
+		classes = new ArrayList<Class>();
 	}
 	
 	
@@ -86,6 +92,10 @@ public class User {
 	
 	public int getID() {
 		return id;
+	}
+	
+	public ArrayList<Class> getClasses() {
+		return classes;
 	}
 	
 

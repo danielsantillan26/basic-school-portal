@@ -84,6 +84,35 @@ public class School {
 	public ArrayList<Class> getClasses() {
 		return classes;
 	}
+	
+	public Student searchStudentByID(int id) {
+		for (Student s : students) {
+			if (s.getID() == id) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	
+	public Teacher searchTeacherByID(int id) {
+		for (Teacher t : teachers) {
+			if (t.getID() == id) {
+				return t;
+			}
+		}
+		return null;
+	}
+	
+
+	public Class searchClassByName(String name) {
+		for (Class c : classes) {
+			if (c.getName().equals(name)) {
+				return c;
+			}
+		}
+		return null;
+	}
 
 
 }
